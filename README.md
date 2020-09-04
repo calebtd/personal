@@ -1,3 +1,3 @@
-# personal
+#README.md
 
-testing
+Nothing to see here, just my personal repository for school projects.

@@ -17,17 +17,34 @@ if yearInSchool == "freshmen":
     excited = input("\nAre you excited for high school? (yes, no): ").lower()
 
     if excited == "yes":
-        input("Good! Are you going to Lone Peak? (yes, no): ")
+        lp = input("Good! Are you going to Lone Peak? (yes, no): ")
+        if lp == "yes":
+            print("Good. You can now be my friend.")
+        else:
+            print("You are no longer my friend. JK lol.")
 
 
 elif yearInSchool == "sophomore":
-    ready = input("\nAre you ready to drive?: ").lower()
+    ready = input("\nAre you ready to drive? (yes, no): ").lower()
+    if ready == "yes":
+        print("Good! You're more prepared than I was!")
 
-# elif yearInSchool == "junior":
+elif yearInSchool == "junior":
+    readyACT = input("Nice! Are you ready for the ACT? (yes, no): ").lower()
+    if readyACT == "yes":
+        print("Hey that's awesome! Good on you.")
+    else:
+        print("That's something you should probably get on.")
 
-# elif yearInSchool == "senior":
+elif yearInSchool == "senior":
+    readyGrad = input("You ready to graduate? (yes, no): ").lower()
+    if readyGrad == "yes":
+        print("That's exciting! Good luck on whatever comes next!")
+    else:
+        print("Yeah. Me neither.")
 
-# elif yearInSchool == "super senior"
+elif yearInSchool == "super senior":
+    print("Alright Mr. Blair. Time to move on. XD")
 
 
 columns = shutil.get_terminal_size().columns

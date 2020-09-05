@@ -1,31 +1,33 @@
-#Caleb Dillenbeck
-#B5 Programming
-#Demo of IF statements
-#I did not copy anyone or anything but Mr. Blair :D
+# Caleb Dillenbeck
+# B5 Programming
+# Demo of IF statements
+# I did not copy anyone or anything but Mr. Blair :D
 
 import shutil
 
-#steve is lucky
+# steve is lucky
 name = input("What's your name?: ").lower()
 
 if name == "steve":
-  print("Congrats! You just won a free movie pass!")
+    print("Congrats! You just won a free movie pass!")
 
 yearInSchool = input("\nWhat year in school are you?: ").lower()
 
 if yearInSchool == "freshmen":
-  excited = input("\nAre you excited to go to Lone Peak?: ").lower()
+    excited = input("\nAre you excited for high school? (yes, no): ").lower()
+
+    if excited == "yes":
+        input("Good! Are you going to Lone Peak? (yes, no): ")
+
 
 elif yearInSchool == "sophomore":
-  ready = input("\nAre you ready to drive?: ").lower()
+    ready = input("\nAre you ready to drive?: ").lower()
 
-#elif yearInSchool == "junior":
+# elif yearInSchool == "junior":
 
-#elif yearInSchool == "senior":
+# elif yearInSchool == "senior":
 
-#elif yearInSchool == "super senior"
-
-
+# elif yearInSchool == "super senior"
 
 
 columns = shutil.get_terminal_size().columns

@@ -1,2 +1,2 @@
-language = "Python 3.8.2"
+language = "python3"
 run = "python3 RPS.py"

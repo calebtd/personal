@@ -1,2 +1,2 @@
-language = "bash"
+language = "default"
 run = "python3 RPS.py"

@@ -59,7 +59,8 @@ while True:
         break
 
     # easter egg
-    # elif usr == '':
+    elif usr == '42':
+        print("Looks like you have life figured out!")
 
     else:
         print('Invalid input, try again.')

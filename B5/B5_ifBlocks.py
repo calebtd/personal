@@ -48,5 +48,5 @@ elif yearInSchool == "super senior":
 
 
 columns = shutil.get_terminal_size().columns
-print("\n\n\n\n")
+print("\n\n\n")
 print("G a m e   O v e r".center(columns))

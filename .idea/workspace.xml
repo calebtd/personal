@@ -44,6 +44,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="full.screen.before.presentation.mode" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -51,9 +52,9 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="preferences.general" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
-  <component name="RunManager" selected="Python.B5_ifBlocks">
+  <component name="RunManager" selected="Python.B5_fishingRegulations">
     <configuration name="B5_ProblemSolving" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="personal" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -68,6 +69,28 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/B5/B5_ProblemSolving.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="B5_fishingRegulations" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="personal" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/B5" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/B5/B5_fishingRegulations.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -144,6 +167,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.B5_fishingRegulations" />
         <item itemvalue="Python.B5_ifBlocks" />
         <item itemvalue="Python.RPS" />
         <item itemvalue="Python.B5_ProblemSolving" />
@@ -161,6 +185,9 @@
       <updated>1599242085916</updated>
       <workItem from="1599246499744" duration="390000" />
       <workItem from="1599253267183" duration="624000" />
+      <workItem from="1599780584479" duration="3834000" />
+      <workItem from="1599855838968" duration="2936000" />
+      <workItem from="1600138908050" duration="8678000" />
     </task>
     <servers />
   </component>
@@ -180,25 +207,62 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1323" height="178" key="GridCell.Tab.0.bottom" timestamp="1599253531030">
+    <state width="1323" height="179" key="GridCell.Tab.0.bottom" timestamp="1600148801219">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="178" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1599253531030" />
-    <state width="1323" height="178" key="GridCell.Tab.0.center" timestamp="1599253531030">
+    <state width="1323" height="179" key="GridCell.Tab.0.bottom.inPresentationMode" timestamp="1600147091925">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="178" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1599253531030" />
-    <state width="1323" height="178" key="GridCell.Tab.0.left" timestamp="1599253531030">
+    <state width="1323" height="179" key="GridCell.Tab.0.bottom.inPresentationMode/0.0.1366.728/1366.-312.1600.860@0.0.1366.728" timestamp="1600147091925" />
+    <state width="1323" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728/1366.-312.1600.860@0.0.1366.728" timestamp="1600148801219" />
+    <state width="1323" height="223" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1599859257806" />
+    <state width="1323" height="179" key="GridCell.Tab.0.center" timestamp="1600148801218">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="178" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1599253531030" />
-    <state width="1323" height="178" key="GridCell.Tab.0.right" timestamp="1599253531030">
+    <state width="1323" height="179" key="GridCell.Tab.0.center.inPresentationMode" timestamp="1600147091925">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="178" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1599253531030" />
-    <state x="184" y="9" key="SettingsEditor" timestamp="1599245662103">
+    <state width="1323" height="179" key="GridCell.Tab.0.center.inPresentationMode/0.0.1366.728/1366.-312.1600.860@0.0.1366.728" timestamp="1600147091925" />
+    <state width="1323" height="179" key="GridCell.Tab.0.center/0.0.1366.728/1366.-312.1600.860@0.0.1366.728" timestamp="1600148801218" />
+    <state width="1323" height="223" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1599859257806" />
+    <state width="1323" height="179" key="GridCell.Tab.0.left" timestamp="1600148801218">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state width="1323" height="179" key="GridCell.Tab.0.left.inPresentationMode" timestamp="1600147091925">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="179" key="GridCell.Tab.0.left.inPresentationMode/0.0.1366.728/1366.-312.1600.860@0.0.1366.728" timestamp="1600147091925" />
+    <state width="1323" height="179" key="GridCell.Tab.0.left/0.0.1366.728/1366.-312.1600.860@0.0.1366.728" timestamp="1600148801218" />
+    <state width="1323" height="223" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1599859257806" />
+    <state width="1323" height="179" key="GridCell.Tab.0.right" timestamp="1600148801218">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="179" key="GridCell.Tab.0.right.inPresentationMode" timestamp="1600147091925">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="179" key="GridCell.Tab.0.right.inPresentationMode/0.0.1366.728/1366.-312.1600.860@0.0.1366.728" timestamp="1600147091925" />
+    <state width="1323" height="179" key="GridCell.Tab.0.right/0.0.1366.728/1366.-312.1600.860@0.0.1366.728" timestamp="1600148801218" />
+    <state width="1323" height="223" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1599859257806" />
+    <state width="1323" height="223" key="GridCell.Tab.1.bottom" timestamp="1599859257806">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="223" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1599859257806" />
+    <state width="1323" height="223" key="GridCell.Tab.1.center" timestamp="1599859257806">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="223" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1599859257806" />
+    <state width="1323" height="223" key="GridCell.Tab.1.left" timestamp="1599859257806">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="223" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1599859257806" />
+    <state width="1323" height="223" key="GridCell.Tab.1.right" timestamp="1599859257806">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="223" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1599859257806" />
+    <state x="184" y="9" key="SettingsEditor" timestamp="1600147162436">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="184" y="9" key="SettingsEditor/0.0.1366.728/1366.-312.1600.860@0.0.1366.728" timestamp="1600147162436" />
     <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1599245662103" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1599245697808">
       <screen x="0" y="0" width="1366" height="728" />
@@ -206,7 +270,8 @@
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1599245697808" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/personal$B5_ifBlocks.coverage" NAME="B5_ifBlocks Coverage Results" MODIFIED="1599253458062" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/B5" />
+    <SUITE FILE_PATH="coverage/personal$B5_fishingRegulations.coverage" NAME="B5_fishingRegulations Coverage Results" MODIFIED="1600146901330" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/B5" />
+    <SUITE FILE_PATH="coverage/personal$B5_ifBlocks.coverage" NAME="B5_ifBlocks Coverage Results" MODIFIED="1599854767985" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/B5" />
     <SUITE FILE_PATH="coverage/personal$RPS.coverage" NAME="RPS Coverage Results" MODIFIED="1599246888477" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

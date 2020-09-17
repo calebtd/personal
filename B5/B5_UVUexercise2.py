@@ -57,6 +57,6 @@ print(math.pi)
 # fahrenheit = 9/5 * celsius + 32
 # print("The temperature {1} is {0:,.2f} degrees Fahrenheit.".format(fahrenheit, celsius))
 
-fahrenheit = float(input("What is the Fahrenheit temperature? "))
+fahrenheit = float(input("What is the Fahrenheit temperature?: "))
 celsius = (fahrenheit - 32) * 5 / 9
-print("The temperature {0:,.2f} is {1} degrees Celsius.".format(fahrenheit, celsius))
+print("The temperature {0:,.2f} is {1:,f} degrees Celsius.".format(fahrenheit, celsius))

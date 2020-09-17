@@ -7,5 +7,11 @@
 
 # print backstory
 
-input("How many crew members?: ")
-input("How many coins?: ")
+crew = int(input("How many crew members? (including you and the first mate): "))
+coins = int(input("How many coins?: "))
+
+# go into town
+
+coins = coins - ((crew - 2) * 3)
+
+print(coins)

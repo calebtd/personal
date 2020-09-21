@@ -39,6 +39,6 @@ coins -= ((crew - 2) * 3)
 print("You and your first mate stay behind, and decide to take some extra for yourselves.\n"
       "You take 12% and you agree to give him 8%")
 
-coins -= 
+# coins -=
 
 print(coins)

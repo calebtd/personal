@@ -3,15 +3,14 @@
 # Captain Jack Assignment
 # I did not copy anyone. This is my original work
 
-# import math
 
 # print backstory
-
 print("\nYour name is Captain Jack. You are the captain of the Black Pearl.\n"
       "You and your crew have had a successful few months plundering and finding treasure,\n"
       "and you're all ready for a break. You finally pull up to the dock and see...")
 input("(Press Enter to continue...)")
 
+# ASCII Art just for fun
 print(""
       " __          __  _                             _        \n"
       " \ \        / / | |                           | |       \n"
@@ -28,17 +27,33 @@ print(""
       "                                     __/ |              \n"
       "                                    |___/")
 
-print("You address your crew and say: '...Here's three coins for each of you, \n"
-      "go into town and have some fun. We'll figure out how to best divvy up our shares'")
+# Tell crew what to do
+print("You address your crew and say: 'A good season we've 'ad, ey?\n"
+      "Plenty a' gold for all of us. Now who's up for some fun in \n"
+      "Tortuga! 'Ere's three coins for each o' you, and shove off. \n"
+      "Gibbs and me 'ill decide 'ow best to divvy up our shares'\n")
 
+# Ask how many crew and coins, assign to variables
 crew = int(input("How many crew members are there? (including you and your first mate): "))
 coins = int(input("How many coins are there?: "))
+
+# Pull out 3 coins for each crew member, except Jack and Gibbs
 coins -= ((crew - 2) * 3)
 
-# go into town
-print("You and your first mate stay behind, and decide to take some extra for yourselves.\n"
-      "You take 12% and you agree to give him 8%")
+# sneaky sneaky
+print("\nYou and your first mate stay behind, both wanting a bit of extra gold. \n"
+      "You sneak in and take 12%, without Gibbs knowing. Then when you are \n"
+      "counting it up, you agree to give Gibbs 8% for being a good first mate.")
 
-# coins -=
+coins //= (25/22)  # 12%
+captainJack = coins
 
-print(coins)
+coins *= .92  # 8%
+gibbs = coins
+
+print("\nYour crew returns, and you then divide the remaining gold to everyone, \n"
+      "including Gibbs and yourself.")
+
+
+print(coins // crew)
+print(coins % crew)

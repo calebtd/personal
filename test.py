@@ -1,32 +1,12 @@
-coins = 1000
-crew = 20
-PBA = 0
+import time
 
-coins -= (crew - 2) * 3
+print('\rZZ', end='')
+time.sleep(1)
 
-jack = int(coins * .12)
-coins -= jack
+print('\ryyy', end='')
+time.sleep(1)
 
-gibbs = int(coins * .08)
-coins -= gibbs
-
-split = coins // crew
-coins -= split * crew
-
-jack += split
-gibbs += split
-
-print(jack)
-print(gibbs)
-print(split)
-print(coins)
-
-print("\n┌─────────────────────┐")
-table = {'Jack': jack,
-         'Gibbs': gibbs,
-         'Crew': split,
-         'PBA': coins}
-for key, value in table.items():
-    print(f'│ {key:6}  -  {value:8} │')
-print("└─────────────────────┘")
-
+x = "Depositing"
+for y in [".", "..", "..."]:
+    print('\r{}{}'.format(x, y), end='')
+    time.sleep(.5)

@@ -1,11 +1,24 @@
-import smtplib, ssl
+import yagmail
 
-port = 465  # For SSL
-password = input("Type your password and press enter: ")
+import time
+t = time.localtime()
+time = time.strftime("%I:%M %p", t)
 
-# Create a secure SSL context
-context = ssl.create_default_context()
+# receiver = 'calebdtest@gmail.com'
+# receiver = '8016634939@tmomail.net'
+receiver = '8013691583@txt.att.net'
+# subject = "Tee Hee"
+body = "Hello!! I love you!!! I sent this from python and can completely control it haha"
+# "This message was sent from Yagmail at {}".format(time)
 
-with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
-    server.login("calebdtest@gmail.com", password)
-    # TODO: Send email here
+# attachPath = "/Users/tom/Downloads/tenor.gif"
+
+# yag = yagmail.SMTP({'calebdtest@gmail.com': 'ur mom'})
+yag = yagmail.SMTP('calebdtest')
+print("Sending...")
+yag.send(
+    to=receiver,
+    # subject=subject,
+    contents=body,
+    # attachments=attachPath
+)

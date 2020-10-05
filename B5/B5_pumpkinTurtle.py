@@ -1,30 +1,40 @@
 import turtle
 
-forward = 50
-width = 2
-
 t = turtle.Turtle()
-t.shape("turtle")
+
+
+def move(x, y):
+    t.pu()
+    t.goto(x, y)
+    t.pd()
+
+
+t.width(2)
+move(0, -125.75)
+
+t.speed(500)
+t.color("black", "orange")
+t.begin_fill()
+
+t.seth(325)
+t.circle(150, 250)
+print(t.pos())
+t.seth(145)
+t.circle(150, 250)
+
+t.end_fill()
 t.width(1)
-t.speed(10)
 
-x = 1
+move(-130, 140)
+t.seth(225)
+t.circle(203, 90)
 
-t.up()
-t.goto(0, 0)
-t.down()
+move(-65, 145)
+t.seth(225)
+t.circle(210, 90)
 
-# for c in ['red', 'green', 'yellow', 'blue']:
-#    t.color(c)
-#    t.forward(forward)
-#    t.left(90)
-
-t.write("hello", move=False, align='center', font=('Arial', 50, 'normal'))
-
-# while True:
-#   t.color("orange")
-#   t.forward(forward + x)
-#   t.left(100)
-#   x += 1
+move(0, 200)
+t.seth(-90)
+t.forward(400)
 
 turtle.exitonclick()

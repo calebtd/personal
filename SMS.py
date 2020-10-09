@@ -1,15 +1,15 @@
 import yagmail
-
 import time
+
 t = time.localtime()
 time = time.strftime("%I:%M %p", t)
 
+receiver = '8016634939@tmomail.net'
 # receiver = 'calebdtest@gmail.com'
-# receiver = '8016634939@tmomail.net'
-receiver = '8013691583@txt.att.net'
+# receiver = '8013691583@txt.att.net'
+
 # subject = "Tee Hee"
-body = "Hello!! I love you!!! I sent this from python and can completely control it haha"
-# "This message was sent from Yagmail at {}".format(time)
+body = "This message was sent from Yagmail at {}".format(time)
 
 # attachPath = "/Users/tom/Downloads/tenor.gif"
 

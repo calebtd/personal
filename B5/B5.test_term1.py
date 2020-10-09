@@ -30,7 +30,8 @@ if trans == "private vehicle":
     people = int(input("How many people?: "))
 
     # if between 1 and 8 people, base fee plus people
-    if 1 <= people <= 7:
+    # CHAINED VS SIMPLIFIED
+    if people >= 1 and people <= 8:
         total = 12 + people
 
     # if over 8, just straight 20

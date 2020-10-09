@@ -15,7 +15,7 @@ def move(x, y):
 
 # stem
 t.color('green')
-move(20, 110)
+move(27, 110)
 t.seth(70)
 t.begin_fill()
 t.circle(75, 120)
@@ -34,7 +34,6 @@ t.begin_fill()
 # shape of pumpkin
 t.seth(325)
 t.circle(150, 250)
-print(t.pos())
 t.seth(145)
 t.circle(150, 250)
 t.end_fill()
@@ -70,10 +69,48 @@ move(8, 123)
 t.seth(-heading)
 t.circle(180, -90)
 ########################
+# eyes
+t.color('#141414')
+ex = 75
+ey = 110
+move(-ex, ey)
+t.seth(180)
+t.begin_fill()
+t.circle(50, 360, 3)
+t.end_fill()
+move(ex, ey)
+t.begin_fill()
+t.circle(50, 360, 3)
+t.end_fill()
 
+#########################
+# nose
+move(0, 30)
+t.begin_fill()
+t.circle(25, 360, 3)
+t.end_fill()
 
-# move(0, 200)
-# t.seth(-90)
-# t.forward(400)
+#########################
+# mouth
+t.color('#141414')
+t.width(2)
+move(-150, -35)
+t.begin_fill()
+t.seth(0)
+t.forward(300)
+t.seth(230)
+t.circle(-195, 100, 4)
+t.end_fill()
+#########################
+# animation
+t.color('black')
+t.width(1)
+t.speed(10000)
+
+t.seth(-50)
+move(-1000, 500)
+for lines in range(250):
+    move(-1000 + (lines * 5), 500)
+    t.forward(1000)
 
 turtle.done()

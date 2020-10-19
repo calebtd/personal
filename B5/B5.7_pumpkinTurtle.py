@@ -1,3 +1,8 @@
+# Caleb Dillenbeck
+# B5 Programming 1 - Mr. Blair
+# Common ACT Math Problems Assignment
+# I did not copy anyone
+
 import turtle
 
 # initial setup

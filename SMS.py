@@ -11,7 +11,7 @@ receiver = '8016634939@tmomail.net'
 # subject = "Tee Hee"
 body = "This message was sent from Yagmail at {}".format(time)
 
-# attachPath = "/Users/tom/Downloads/tenor.gif"
+attachPath = "/Users/tom/Downloads/tenor.gif"
 
 # yag = yagmail.SMTP({'calebdtest@gmail.com': 'ur mom'})
 yag = yagmail.SMTP('calebdtest')

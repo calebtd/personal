@@ -29,17 +29,17 @@ bagsOfDoritos = 2000
 # ask user for command
 command = input("Enter Command: ").lower()
 
-if command == "power on":
-    # power checker
+# if command == "power on":
+# power checker
 
-elif command == "insert coin":
-    # power check
-    # add coins
-    # if enough coins, spit out bag
-    # print coins inserted
+# elif command == "insert coin":
+# power check
+# add coins
+# if enough coins, spit out bag
+# print coins inserted
 
-elif command == "total coins":
-    # print coins
+# elif command == "total coins":
+# print coins
 
-elif command == "total bags":
-    # print bags
+# elif command == "total bags":
+# print bags

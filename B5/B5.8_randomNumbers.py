@@ -12,10 +12,10 @@ import random
 import turtle
 
 # ask for number of steps, positive int only
-s = int(input('How many steps would you like the random walk to take?: '))
-while s < 1:
+steps = int(input('How many steps would you like the random walk to take?: '))
+while steps < 1:
     print("Please input a positive number.")
-    s = int(input('How many steps would you like the random walk to take?: '))
+    steps = int(input('How many steps would you like the random walk to take?: '))
 
 # setup variables
 x = 0
@@ -24,7 +24,7 @@ t = turtle
 t.speed(5000)
 
 # provided walk code
-for n in range(s):
+for n in range(steps):
     angle = random.random() * 2 * math.pi
     x += math.cos(angle) * 2
     y += math.sin(angle) * 2
@@ -32,16 +32,14 @@ for n in range(s):
     t.goto(x, y)
 
 # go back to beginning, draws a line as well
-tx = t.xcor()
-ty = t.ycor()
 t.goto(0, 0)
 
 # print actual distance traveled
-print(f"The actual distance traveled is {x}, {y}")
+print(f"\nThe actual distance traveled was {steps} steps")
 # print distance formula between first and last position
-dist = math.sqrt(((tx - 0)**2) + ((ty - 0)**2))
-print(f"\nThe distance between the starting point\n"
-      f"and the ending point is {dist:.4f}")
+dist = math.sqrt(((x - 0)**2) + ((y - 0)**2))
+print(f"The distance between the starting point "
+      f"and the ending point was {dist:.4f}")
 
 # pause for next section, clear turtle
 input("\nPress Enter...")
@@ -94,6 +92,6 @@ while True:
         # move back to 0 and start over
         move(0, 0)
 
-    # after that, change background
+    # after repeating that 5 times, change background
     # no one wants a seizure
     t.bgcolor(random.choice(bgcolors))

@@ -35,9 +35,9 @@ while True:
 
     if command == "forward":
         if position ==
-        # move the user forward one position
-        position = position + 1
-        print("You are now at position :", position)
+            # move the user forward one position
+            position = position + 1
+            print("You are now at position :", position)
 
     elif command == "help":
         print("Here is a list of commands:")

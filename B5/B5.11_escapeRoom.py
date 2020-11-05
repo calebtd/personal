@@ -22,22 +22,35 @@ def dot(x):
         time.sleep(.45)
 
 
+win = False
 position = 1
-lights = "off"
+lights = False
+door = False
+
 print(
     "You are in an escape room.  There is a locked door in the room.  Your task is to find a way out.  "
     "Type 'help' at any time for a list of commands.")
 
-while True:
+while not win:
 
     # ask the user what they want to do
     command = input("What do you want to do?: ").lower()
 
     if command == "forward":
-        if position ==
+        if not door and position == 4:
+            print("You can't go forward")
+        else:
             # move the user forward one position
-            position = position + 1
-            print("You are now at position :", position)
+            position += 1
+            print("You are now at position", position)
+            
+    if command == "backward":
+        if position == 1:
+            print("You can't go forward")
+        else:
+            # move the user backward one position
+            position -= 1
+            print("You are now at position", position)
 
     elif command == "help":
         print("Here is a list of commands:")
@@ -74,4 +87,7 @@ while True:
     else:
         print("Command not recognized.")
 
-print("game over!")
+if win:
+    print("Congrats")
+
+print("Game Over!")

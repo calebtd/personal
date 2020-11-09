@@ -48,16 +48,17 @@ lights = doorCode = doorKey = move = haveKey = unlocked \
 # This is the initial dictionary for the help command. This is how the user knows what to do,
 # and it builds on it and deletes from it as the program goes along. It also tells the program
 # whether or not it can run commands.
-helpDict = {'Look': 'Looks around the current room',
-            'Forward': 'Moves you forward one position',
+helpDict = {'Forward': 'Moves you forward one position',
             'Backward': 'Moves you backward one position',
-            'Position': 'Checks your current position'}
+            'Position': 'Checks your current position',
+            '----------': '',
+            'Look': 'Looks around the current room'}
 
 # Nice formatting for the initial message
 lines = '─' * 82
 print(f'┌{lines}┐')
 print("Welcome to my escape room, --The-House-of-Pythons--. Your task is to find a way out.\n"
-      "Type 'help' at any time for a list of commands. (This is essential.)")
+      "Type 'help' at any time for a list of commands.  (This is essential, as it changes.)")
 print(f'└{lines}┘')
 
 # Repeat this until break
@@ -95,6 +96,7 @@ while True:
         # and if they're in room 4, put that command in. Else...
         if position == 4:
             helpDict['Try Handle'] = 'Turn the handle on the door in room 4.'
+            print('**New Command**.')
         # pull it out
         else:
             if 'Try Handle' in helpDict:
@@ -104,6 +106,7 @@ while True:
     if canCode:
         if position == 4 and not doorCode:
             helpDict['Type Code'] = 'Type to the keypad on the door in room 4'
+            print('**New Command**.')
         else:
             if 'Type Code' in helpDict:
                 helpDict.pop('Type Code')
@@ -113,7 +116,10 @@ while True:
     # Forward command
     if command == "forward":
         if not move:
-            print("You can't go forward")
+            if position == 1:
+                print("You can't go forward. Try typing help.")
+            else:
+                print("You can't go forward.")
         # if the lights aren't on, don't continue
         elif position == 2:
             if lights:
@@ -125,7 +131,7 @@ while True:
             if unlocked:
                 forward()
             else:
-                print("You can't go forward")
+                print("You can't go forward.")
         else:
             forward()
 
@@ -160,6 +166,7 @@ while True:
                       "This must be the front entrance.")
                 # add opening the front door.
                 helpDict["Open"] = "Open the unlocked door you just found."
+                print('**New Command**.')
             else:
                 print("Nothing new here.")
 
@@ -169,12 +176,14 @@ while True:
                 print("It's really dark in here.  I can't see anything.")
                 # add feeling the room
                 helpDict["Feel"] = "Feels around the room"
+                print('**New Command**.')
             # show this only if they've been in 4 and they have the key
             elif in4 and haveKey:
                 if not doorKey:
                     print("I must've missed this before. There's a tiny keyhole in the corner.")
                     # add putting the key in
                     helpDict['Insert Key'] = "Put the key in the keyhole you just found"
+                    print('**New Command**.')
                 else:
                     print("Nothing else to see here.")
             # if they've ben to 4 but don't have the key
@@ -190,6 +199,7 @@ while True:
                 print("There's table with a key sitting on it.")
                 # add pick up.
                 helpDict['Pick Up'] = "Pick up the key you just found"
+                print('**New Command**.')
             # this way they can't pick it up over and over
             else:
                 print("I don't see anything else in here.")
@@ -217,13 +227,14 @@ while True:
     # Just like look, lots of logic.
     elif command == 'feel':
         if 'Feel' in helpDict:
-            dot('Feeling', 6)
+            dot('Feeling', 4)
 
             if position == 2:
                 if not lights:
                     # This is how to turn on the lights
                     print("Oh! There's a switch!")
                     helpDict['Flip'] = "Flips the switch you found"
+                    print('**New Command**.')
                 else:
                     print("I don't feel anything else unusual.")
             elif position == 3:
@@ -236,10 +247,14 @@ while True:
                     print("Nothing new here.")
             elif position == 4:
                 # This is how to get the hint.
-                print("Hidden in a corner you find a paper that blends in with the wall.\n"
-                      "It's all folded up and kind of looks like a hint.")
-                # add read hint
-                helpDict['Read Hint'] = "Read the hint you found in room 4."
+                if 'Read Hint' in helpDict:
+                    print('Nothing new here.')
+                else:
+                    print("Hidden in a corner you find a paper that blends in with the wall.\n"
+                          "It's all folded up and kind of looks like a hint.")
+                    # add read hint
+                    helpDict['Read Hint'] = "Read the hint you found in room 4."
+                    print('**New Command**.')
             else:
                 print("Nothing to feel here.")
         else:
@@ -343,9 +358,9 @@ while True:
         print("You have exploded.")
         break
 
-    # elif command == 'debug':
-    #     lights = doorFront = move = in4 = doorKey = canHandle = True
-    #     helpDict["Feel"] = "Feels around the room"
+    elif command == 'debug':
+        lights = doorFront = move = in4 = canHandle = True
+        helpDict["Feel"] = "Feels around the room"
 
     else:
         print("Command not recognized.")

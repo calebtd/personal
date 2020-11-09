@@ -42,8 +42,8 @@ def backward():
 
 # initial variables
 position = 1
-lights = doorCode = doorKey = move = haveKey = unlocked \
-    = in1 = in2 = in3 = in4 = canHandle = canCode = False
+lights = doorCode = doorKey = move = haveKey = unlocked = handleNew = codeNew\
+    = in1 = in2 = in3 = in4 = in4new = canHandle = canCode = False
 
 # This is the initial dictionary for the help command. This is how the user knows what to do,
 # and it builds on it and deletes from it as the program goes along. It also tells the program
@@ -96,7 +96,6 @@ while True:
         # and if they're in room 4, put that command in. Else...
         if position == 4:
             helpDict['Try Handle'] = 'Turn the handle on the door in room 4.'
-            print('**New Command**.')
         # pull it out
         else:
             if 'Try Handle' in helpDict:
@@ -106,7 +105,6 @@ while True:
     if canCode:
         if position == 4 and not doorCode:
             helpDict['Type Code'] = 'Type to the keypad on the door in room 4'
-            print('**New Command**.')
         else:
             if 'Type Code' in helpDict:
                 helpDict.pop('Type Code')
@@ -161,12 +159,14 @@ while True:
 
         if position == 1:
             # if they haven't been to 2 yet
-            if not in2:
+            if not move:
                 print("You are in a window lit room with nothing but an unlocked door. "
                       "This must be the front entrance.")
                 # add opening the front door.
                 helpDict["Open"] = "Open the unlocked door you just found."
                 print('**New Command**.')
+            elif move and not lights:
+                print("Now you can move forward.")
             else:
                 print("Nothing new here.")
 
@@ -209,6 +209,9 @@ while True:
             if haveKey:
                 # point out that a lack of key commands is not a bug
                 print("How do I unlock this thing...?")
+            if not in4new:
+                print("\n**New commands specific to this room. They will change without warning.**")
+                in4new = True
             # They can try turning the handle if they're in room 4
             canHandle = True
 
@@ -240,11 +243,11 @@ while True:
             elif position == 3:
                 # Once they've been to 4 before, they can do this
                 if in4:
-                    print("There was a paper hidden under the table. It has the code 29704 on it.\n"
+                    print("Woah! There was a paper hidden under the table. It has the code 29704 on it.\n"
                           "Wasn't there a keypad somewhere?")
                     canCode = True
                 else:
-                    print("Nothing new here.")
+                    print("I don't feel anything new here.")
             elif position == 4:
                 # This is how to get the hint.
                 if 'Read Hint' in helpDict:
@@ -330,7 +333,12 @@ while True:
     # You can only type it in if you've seen the code in 3
     elif command == 'type code':
         if 'Type Code' in helpDict:
-            inputCode = int(input('Type code: '))
+            while True:
+                try:
+                    inputCode = int(input('Type code: '))
+                    break
+                except ValueError:
+                    print("Please type a valid number code.\n")
             if inputCode == 29704:
                 print("Code Accepted")
                 doorCode = True
@@ -358,9 +366,9 @@ while True:
         print("You have exploded.")
         break
 
-    elif command == 'debug':
-        lights = doorFront = move = in4 = canHandle = True
-        helpDict["Feel"] = "Feels around the room"
+    # elif command == 'debug':
+    #     lights = doorFront = move = in4 = canHandle = True
+    #     helpDict["Feel"] = "Feels around the room"
 
     else:
         print("Command not recognized.")

@@ -55,10 +55,12 @@ helpDict = {'Forward': 'Moves you forward one position',
             'Look': 'Looks around the current room'}
 
 # Nice formatting for the initial message
-lines = '─' * 82
+lines = '─' * 48
 print(f'┌{lines}┐')
-print("Welcome to my escape room, --The-House-of-Pythons--. Your task is to find a way out.\n"
-      "Type 'help' at any time for a list of commands.  (This is essential, as it changes.)")
+print("│ Welcome to my escape room, The-House-of-Python │\n"
+      "│         Your task is to find a way out         │\n"
+      "│ Type 'help' at any time for a list of commands │\n"
+      "│       (This is essential, as it changes)       │")
 print(f'└{lines}┘')
 
 # Repeat this until break

@@ -1,6 +1,6 @@
 # Caleb Dillenbeck
 # B5 Programming 1 - Mr. Blair
-# Calculator with Functions
+# Escape Room
 # I did not copy anyone
 
 # This escape room has just a few more things than what's required.

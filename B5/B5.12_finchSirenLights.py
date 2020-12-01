@@ -1,3 +1,8 @@
+# Caleb Dillenbeck
+# B5 Programming 1 - Mr. Blair
+# Finch Siren and Lights
+# I did not copy anyone
+
 from finch import Finch
 import time
 

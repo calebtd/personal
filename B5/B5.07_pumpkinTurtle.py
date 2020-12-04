@@ -8,7 +8,7 @@ import turtle
 # initial setup
 t = turtle.Turtle()
 turtle.bgcolor('#2b2b2b')
-t.speed(500)
+t.speed(0)
 
 
 # make a move function for pen up and down

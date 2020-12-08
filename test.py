@@ -1,13 +1,19 @@
-from flask import Flask
+# from flask import Flask
+#
+# app = Flask(__name__)
+#
+#
+# @app.route('/')
+# def hello_world():
+#     exec(open("B5/B5.11_escapeRoom.py").read())
+#
+#
+# if __name__ == '__main__':
+#     port = 8000  # the custom port you want
+#     app.run(host='localhost', port=port)
 
-app = Flask(__name__)
+def triangle_area(a, b, c):
+    (a + b + c)/2
 
 
-@app.route('/')
-def hello_world():
-    exec(open("B5/B5.11_escapeRoom.py").read())
-
-
-if __name__ == '__main__':
-    port = 8000  # the custom port you want
-    app.run(host='localhost', port=port)
+print(triangle_area(1, 5, 8))

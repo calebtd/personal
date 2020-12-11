@@ -18,11 +18,11 @@ import math
 
 
 def sphereArea(r):
-    return 4 * math.pi * r ** 2
+    return 4 * math.pi * (r ** 2)
 
 
 def sphereVolume(r):
-    return (4 / 3) * math.pi * r ** 3
+    return (4 / 3) * math.pi * (r ** 3)
 
 
 print('--Sphere Volume and Area--')

@@ -9,11 +9,10 @@ import time
 finchy = Finch()
 
 
-
 def flash():
-    finchy.led(255,0,0)
+    finchy.led(255, 0, 0)
     time.sleep(.75)
-    finchy.led(0,0,255)
+    finchy.led(0, 0, 255)
     time.sleep(.75)
 
 
@@ -30,7 +29,6 @@ def chase():
 def parade():
     finchy.buzzer_with_delay(.45, 784)
     finchy.buzzer_with_delay(.45, 622)
-
 
 
 while True:

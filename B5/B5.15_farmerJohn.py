@@ -39,7 +39,7 @@ def circles(a, b, r):
 while True:
     try:
         # Get the input
-        side = int(input('Choose a size for the rectangle: '))
+        side = int(input('Choose a size for the square: '))
         # raise the exception manually if negative
         if side > 0:
             break

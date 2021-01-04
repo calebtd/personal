@@ -7,3 +7,5 @@ venv/
 josh escape.py
 
 josh escape final.py
+
+__pycache__/

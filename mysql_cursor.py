@@ -46,7 +46,7 @@ class Connection:
         """Takes a query to execute for reading, such as select"""
         cursor = self.connection.cursor()
         cursor.execute(query)
-        result = cursor.fetchone()
+        result = cursor.fetchall()
         return result
 
     def close(self):
@@ -64,7 +64,7 @@ if __name__ == "__main__":
     update = "UPDATE LPCU SET BALANCE = 56.56 WHERE USER_ID = 1"
 
     query_result = conn.execute_read_query(read)
-    print(query_result[0])
+    print(query_result[0][0])
 
     # print(conn.execute_query(update))
 

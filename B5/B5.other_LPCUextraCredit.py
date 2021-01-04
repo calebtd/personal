@@ -23,6 +23,17 @@ def dot(x):
         time.sleep(.25)
 
 
+def decimals(num):
+    try:
+        number = str(num)
+        if len(number.rsplit('.')[-1]) == 1:
+            return "${:#,}0".format(float(number))
+        else:
+            return "${:#,}".format(float(number))
+    except ValueError:
+        return "!!Value Error!!"
+
+
 # ask for name to put in welcome
 # name = input("What is your name?: ")
 name = 'Caleb'
@@ -32,7 +43,8 @@ print("\nHi {}! Welcome to Lone Peak Credit Union. "
       "You are important to our business!".format(name))
 
 # 0 at the beginning, that changes in the loop
-accountBalance = float(conn.execute_read_query('SELECT BALANCE FROM LPCU WHERE USER_ID = 1')[0])
+accountBalance = float(conn.execute_read_query(
+    'SELECT BALANCE FROM LPCU WHERE USER_ID = 1')[0][0])
 
 # create loop
 while True:
@@ -46,7 +58,7 @@ while True:
         transAmount = float(input("How much money would you like to deposit?: "))
         dot("Depositing")  # call the progress dots function
         accountBalance += transAmount
-        print("\nYour balance is now ${:,.2f}".format(accountBalance))
+        print("\nYour balance is now " + decimals(accountBalance))
 
     # if they say withdraw, ask how much and withdraw the money from their account
     elif action == "w":
@@ -56,13 +68,13 @@ while True:
         if transAmount <= accountBalance:
             dot("Withdrawing")  # call the progress dots function
             accountBalance -= transAmount
-            print("\nYour balance is now ${:,.2f}".format(accountBalance))
+            print("\nYour balance is now " + decimals(accountBalance))
         else:
             print("Insufficient Funds.\n")
 
     # if they just want to check balance, print it
     elif action == "c":
-        print("Your balance is ${:,.2f}".format(accountBalance))
+        print("\nYour balance is " + decimals(accountBalance))
 
     elif action == 't':
         break

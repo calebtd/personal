@@ -4,6 +4,9 @@ import paramiko
 from sshtunnel import SSHTunnelForwarder
 from os.path import expanduser
 
+# Usage for connection is:  ssh_host, ssh_user, ssh_key,
+#                           sql_user, sql_pass, sql_name
+
 
 class Connection:
     """Takes all the variables needed to make a connection"""
@@ -69,6 +72,3 @@ if __name__ == "__main__":
     # print(conn.execute_query(update))
 
     conn.close()
-
-# ssh_host, ssh_user, ssh_key,
-# sql_user, sql_pass, sql_name

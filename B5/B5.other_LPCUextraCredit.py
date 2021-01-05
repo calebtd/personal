@@ -10,10 +10,6 @@
 import time
 import mysql_cursor
 
-# start connection
-conn = mysql_cursor.Connection('home.dillenbeck.org', 'caleb', '/.ssh/id_rsa',
-                               'caleb', '/sql_pass.txt', 'caleb')
-
 
 # set up function for moving progress dots. functions are fun!!
 def dot(x):
@@ -34,9 +30,33 @@ def decimals(num):
         return "!!Value Error!!"
 
 
-# ask for name to put in welcome
-# name = input("What is your name?: ")
-name = 'Caleb'
+# start connection
+conn = mysql_cursor.Connection('home.dillenbeck.org', 'caleb', '/.ssh/id_rsa',
+                               'caleb', '/sql_pass.txt', 'caleb')
+
+users = conn.execute_read_query("SELECT USER_ID, USER FROM LPCU")
+
+validUser = False
+
+while True:
+    name = input("Username: ")
+    for _ in users:
+        if _[1] == name:
+            validUser = True
+            user_id = _[0]
+            break
+    if validUser:
+        break
+    print('Unknown user. Try again.')
+
+read_password = conn.execute_read_query(f"SELECT USER_ID, PASS FROM LPCU WHERE USER_ID = {user_id}")[0][1]
+
+while True:
+    input_password = input("Password: ")
+    if input_password == read_password:
+        break
+    print("Incorrect.")
+
 
 # welcome the user and state the motto
 print("\nHi {}! Welcome to Lone Peak Credit Union. "
@@ -44,7 +64,7 @@ print("\nHi {}! Welcome to Lone Peak Credit Union. "
 
 # 0 at the beginning, that changes in the loop
 accountBalance = float(conn.execute_read_query(
-    'SELECT BALANCE FROM LPCU WHERE USER_ID = 1')[0][0])
+    f'SELECT BALANCE FROM LPCU WHERE USER_ID = {user_id}')[0][0])
 
 # create loop
 while True:
@@ -83,7 +103,7 @@ while True:
     else:
         print("Invalid input. Please select deposit or withdraw.")
 
-update_query = 'UPDATE LPCU SET BALANCE = {} WHERE USER_ID = 1'.format(accountBalance)
+update_query = 'UPDATE LPCU SET BALANCE = {} WHERE USER_ID = {}'.format(accountBalance, user_id)
 conn.execute_query(update_query)
 conn.close()
 

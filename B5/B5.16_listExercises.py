@@ -10,22 +10,20 @@ print('Problem 1')
 
 disneyCharacters = ['Mickey', 'Donald', 'Goofy', 'Minnie']
 
-print(disneyCharacters[0], disneyCharacters[1])
-print(disneyCharacters[1], disneyCharacters[0])
-print(disneyCharacters[1], disneyCharacters[2])
-print(disneyCharacters[3], disneyCharacters[2], disneyCharacters[1], disneyCharacters[0])
+print(disneyCharacters[0:2:])
+print(disneyCharacters[-3:-5:-1])
+print(disneyCharacters[1:3:])
+print(disneyCharacters[-1:-5:-1])
 
 # 2
 print('\nProblem 2')
 
-s1 = [2, 1, 4, 3]
-s2 = ['c', 'a', 'b']
-
-print(s1 + s2)  # [2, 1, 4, 3, c, a, b]
-print(3 * s1 + 2 * s2)  # [2, 1, 4, 3, 2, 1, 4, 3, 2, 1, 4, 3, c, a, b, c, a, b]
-print(s1[1])  # 1
-print(s1[1:3])  # 1, 4, 3
-# print(s1 + s2[-1])      # 2, 1, 4, 3, b
+# A. [2, 1, 4, 3, c, a, b]
+# B. [2, 1, 4, 3, 2, 1, 4, 3, 2, 1, 4, 3, 'c', 'a', 'b', 'c', 'a', 'b']
+# C. 1
+# D. [1, 4]
+# E. TypeError
+print("Check Comments.")
 
 # 3
 print('\nProblem 3')
@@ -92,7 +90,32 @@ name = input("What's your name?: ").lower()
 for char in name:
     if char in vowels:
         vowel_count += 1
-print(f"Your name has {vowel_count} vowels in it.")
+print(f"Your name has {vowel_count} vowel(s) in it.")
+
+# Extra credit
+print("\nExtra Credit Problem")
+
+# put string to check here
+paragraph = '''
+President Trump has been asking aides and lawyers, including White House counsel Pat Cipollone, about his 
+self-pardon power, multiple sources tell CNN. 
+
+Some of those conversations have happened in recent weeks, one of the sources said. It is unclear if it has 
+come up since the mayhem at the Capitol building yesterday fomented by the President’s rhetoric or after his 
+recent controversial call with the Georgia secretary of state. Trump has asked about the legal and political 
+consequences of a self-pardon, according to a source close to the President. He has also asked for legal 
+opinions on whether he has the authority to issue a self-pardon and has been advised on the potential political 
+fallout. This person said it was not yet clear whether the President would follow through with a pardon for himself.
+'''.lower()
+
+# put the word you want to check for here
+word = "the"
+
+wordcount = 0
+for char in paragraph.split():
+    if char == word:
+        wordcount += 1
+print(f'''The word "{word}" is used {wordcount} times.''')
 
 # End
-print("\nThank you! Bye!!")
+print("\n\nThank you! Bye!!")

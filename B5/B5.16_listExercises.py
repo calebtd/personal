@@ -6,7 +6,7 @@
 import random
 
 # 1
-print('Problem 1:')
+print('Problem 1')
 
 disneyCharacters = ['Mickey', 'Donald', 'Goofy', 'Minnie']
 
@@ -16,27 +16,83 @@ print(disneyCharacters[1], disneyCharacters[2])
 print(disneyCharacters[3], disneyCharacters[2], disneyCharacters[1], disneyCharacters[0])
 
 # 2
-print('\nProblem 2:')
+print('\nProblem 2')
 
 s1 = [2, 1, 4, 3]
 s2 = ['c', 'a', 'b']
 
-print(s1 + s2)          # [2, 1, 4, 3, c, a, b]
+print(s1 + s2)  # [2, 1, 4, 3, c, a, b]
 print(3 * s1 + 2 * s2)  # [2, 1, 4, 3, 2, 1, 4, 3, 2, 1, 4, 3, c, a, b, c, a, b]
-print(s1[1])            # 1
-print(s1[1:3])          # 1, 4, 3
-print(s1 + s2[-1])      # 2, 1, 4, 3, b
+print(s1[1])  # 1
+print(s1[1:3])  # 1, 4, 3
+# print(s1 + s2[-1])      # 2, 1, 4, 3, b
 
 # 3
-print('\nProblem 3:')
+print('\nProblem 3')
 
 
-def shuffle(myList):
+def shuffle(mylist):
     new_list = []
-    for x in myList:
-        new_list.pop(myList[random.randint(0, len(myList))])
+    length = len(mylist)
+    for _ in range(length):
+        randint = random.randint(0, len(mylist) - 1)
+        new_list.append(mylist.pop(randint))
     return new_list
 
 
 line = ['Bob', 'Gretchen', 'Jane', 'Jim']
 print(shuffle(line))
+
+# 4
+print('\nProblem 4')
+
+
+def innerProd(x, y):
+    length = len(x)
+    new_list = []
+    for _ in range(length):
+        new_list.append(x[_] * y[_])
+    return new_list
+
+
+list_X = [1, 2, 3]
+list_Y = [3, 2, 1]
+print(innerProd(list_X, list_Y))
+
+# 5
+print('\nProblem 5')
+
+
+def getLongestName(mylist):
+    mylist.sort(key=len)
+    return mylist[-1]
+
+
+favNames = []
+name_input = input("Tell me your favorite names (enter 'd' when done): ")
+favNames.append(name_input)
+while True:
+    name_input = input("Next: ")
+    if name_input == 'd':
+        if len(favNames) < 2:
+            print("Please add at least 2 items.")
+        else:
+            break
+    else:
+        favNames.append(name_input)
+
+print("\nThe longest name is ->", getLongestName(favNames))
+
+# 6
+print('\nProblem 6')
+
+vowels = ['a', 'e', 'i', 'o', 'u']
+vowel_count = 0
+name = input("What's your name?: ").lower()
+for char in name:
+    if char in vowels:
+        vowel_count += 1
+print(f"Your name has {vowel_count} vowels in it.")
+
+# End
+print("\nThank you! Bye!!")

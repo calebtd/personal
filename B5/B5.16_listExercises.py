@@ -10,22 +10,20 @@ print('Problem 1')
 
 disneyCharacters = ['Mickey', 'Donald', 'Goofy', 'Minnie']
 
-print(disneyCharacters[0], disneyCharacters[1])
-print(disneyCharacters[1], disneyCharacters[0])
-print(disneyCharacters[1], disneyCharacters[2])
-print(disneyCharacters[3], disneyCharacters[2], disneyCharacters[1], disneyCharacters[0])
+print(disneyCharacters[0:2:])
+print(disneyCharacters[-3:-5:-1])
+print(disneyCharacters[1:3:])
+print(disneyCharacters[-1:-5:-1])
 
 # 2
 print('\nProblem 2')
 
-s1 = [2, 1, 4, 3]
-s2 = ['c', 'a', 'b']
-
-print(s1 + s2)  # [2, 1, 4, 3, c, a, b]
-print(3 * s1 + 2 * s2)  # [2, 1, 4, 3, 2, 1, 4, 3, 2, 1, 4, 3, c, a, b, c, a, b]
-print(s1[1])  # 1
-print(s1[1:3])  # 1, 4, 3
-# print(s1 + s2[-1])      # 2, 1, 4, 3, b
+# A. [2, 1, 4, 3, c, a, b]
+# B. [2, 1, 4, 3, 2, 1, 4, 3, 2, 1, 4, 3, 'c', 'a', 'b', 'c', 'a', 'b']
+# C. 1
+# D. [1, 4]
+# E. TypeError
+print("Check Comments.")
 
 # 3
 print('\nProblem 3')

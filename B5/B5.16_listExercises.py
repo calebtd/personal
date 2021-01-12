@@ -90,7 +90,32 @@ name = input("What's your name?: ").lower()
 for char in name:
     if char in vowels:
         vowel_count += 1
-print(f"Your name has {vowel_count} vowels in it.")
+print(f"Your name has {vowel_count} vowel(s) in it.")
+
+# Extra credit
+print("\nExtra Credit Problem")
+
+# put string to check here
+paragraph = '''
+President Trump has been asking aides and lawyers, including White House counsel Pat Cipollone, about his 
+self-pardon power, multiple sources tell CNN. 
+
+Some of those conversations have happened in recent weeks, one of the sources said. It is unclear if it has 
+come up since the mayhem at the Capitol building yesterday fomented by the President’s rhetoric or after his 
+recent controversial call with the Georgia secretary of state. Trump has asked about the legal and political 
+consequences of a self-pardon, according to a source close to the President. He has also asked for legal 
+opinions on whether he has the authority to issue a self-pardon and has been advised on the potential political 
+fallout. This person said it was not yet clear whether the President would follow through with a pardon for himself.
+'''.lower()
+
+# put the word you want to check for here
+word = "the"
+
+wordcount = 0
+for char in paragraph.split():
+    if char == word:
+        wordcount += 1
+print(f'''The word "{word}" is used {wordcount} times.''')
 
 # End
-print("\nThank you! Bye!!")
+print("\n\nThank you! Bye!!")

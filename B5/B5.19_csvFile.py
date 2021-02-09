@@ -13,6 +13,7 @@ with open('stations-filtered.csv', 'w', newline='') as filteredFile:
             if row[7] != '':
                 writer.writerow(row)
 
+
 # Problem 2
 drainage = []
 with open('stations-filtered.csv', 'r', newline='') as filteredFile:
@@ -30,26 +31,20 @@ with open('drainage-area-avg.txt', 'w') as drainageAverage:
     drainageAverage.write(str(result))
     # print(f'{result:.4f}')
 
+
 # Problem 3
 
-# ord('')
-# chr()
 
-# fileName = input("What's the input file name?: ")
-# shift = input("How many shift values?: ")
-
-
-def shift(a, b):
-    code = int(ord(f'{a}'))
-    return chr(code + b)
+def shift(letter_fun, shift_fun):
+    code = int(ord(f'{letter_fun}'))
+    return chr(code + shift_fun)
 
 
 fileName = input("What's the input file name?: ")
 shiftAmount = int(input("How many shift values?: "))
 
-with open(f'{fileName}') as cleanFile:
-    with open('fileciphertext.txt', 'a') as cipheredFile:
-        cipheredFile.truncate()
+with open(f'{fileName}', 'r') as cleanFile:
+    with open('fileciphertext.txt', 'w') as cipheredFile:
         for word in cleanFile:
             for letter in word:
                 cipheredFile.write(shift(letter, shiftAmount))

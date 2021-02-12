@@ -5,14 +5,14 @@
 
 
 # Function for printing lists nicely
-def printTable(dictionary, sorter=False):  # Pass the dictionary, pass a sorter if there is one
+def print_table(dictionary, sorter=False):  # Pass the dictionary, pass a sorter if there is one
     # Newline
     print()
     # Get the length of the longest dictionary key, use that to space the printed list
     longest_key = max(map(len, dictionary))
 
     # Format the list if there's an asterisk
-    for keys, values in dictionary.items():
+    for values in dictionary.values():
         if values == 300:
             longest_key += 1
 
@@ -52,13 +52,13 @@ while True:
             print("Make sure all scores are numbers.")
 
 # Print in input order
-printTable(scores)
+print_table(scores)
 
 # Print in numerical order
-printTable(scores, 1)  # The 1 is for the lambda, sort by the value index
+print_table(scores, 1)  # The 1 is for the lambda, sort by the value index
 
 # Print in alphabetical order
-printTable(scores, 0)  # The 0 is for the lambda, sort by the key index
+print_table(scores, 0)  # The 0 is for the lambda, sort by the key index
 
 
 # Get the key for max and min values

@@ -68,5 +68,12 @@ minKey = min(scores, key=scores.get)
 print(f"\nCongrats to {maxKey} for a high score of {scores[maxKey]}!")
 print(f"Better luck next time {minKey}, with {scores[minKey]}.")
 
+addedScore = 0
+for val in scores.values():
+    addedScore += val
+averageScore = addedScore // len(scores)
+print(f"The team average score is {averageScore}.")
+
+
 with open('game_results.txt', 'w') as resultsFile:
     pass

@@ -3,6 +3,7 @@
 # Fast Food Menu based on Chick-fil-A
 # I did not copy anyone
 
+import csv
 
 # Problem 1
 # A
@@ -70,7 +71,8 @@ print('Welcome to Chick-fil-A! What can I do for you?')
 for key, value in options.items():
     print(f'{key}.) {value}')
 
-cart = []
+order = []
+orderPlaced = False
 
 while True:
     try:
@@ -97,46 +99,51 @@ while True:
                 print('Make sure to input a valid number.\n')
             else:
                 break
-        cart.append(menu[response]['Name'])
-        print(f'Added a {cart[-1]} to cart.')
+        order.append(menu[response]['Name'])
+        print(f'Added a {order[-1]} to cart.')
 
     elif prompt == 3:
-        if len(cart) == 0:
+        if len(order) == 0:
             print('Please add items to your cart first.')
         else:
             response = try_block('Which item would you like to remove from your cart?: ')
-            removedItem = cart.pop(response - 1)
+            removedItem = order.pop(response - 1)
             print(f'Removed a {removedItem}.')
 
     elif prompt == 4:
-        if len(cart) == 0:
+        if len(order) == 0:
             print('Your cart is empty')
         else:
             print('Your Cart:')
-            for item in range(len(cart)):
-                print(f'  {item + 1}.) {cart[item]}')
+            for item in range(len(order)):
+                print(f'  {item + 1}.) {order[item]}')
 
     elif prompt == 5:
-        if len(cart) == 0:
+        if len(order) == 0:
             print('Please add items to your cart first.')
         else:
             print('Is your order information correct?:')
-            for item in range(len(cart)):
-                print(f'  {item + 1}.) {cart[item]}')
+            for item in range(len(order)):
+                print(f'  {item + 1}.) {order[item]}')
             while True:
                 response = input('\n(y/n): ')
 
                 if response == 'y':
                     print('Placing Order...')
                     print('\nOrder Placed. Your food will be ready shortly!')
-                    cart.clear()
-                    exit()
+                    orderPlaced = True
+                    order.clear()
+                    break
                 elif response == 'n':
                     print('Order Cancelled.')
                     break
                 else:
                     print("\nPlease input 'y' or 'n'.")
+    if orderPlaced:
+        break
 
 # Problem 6
-with open('menu.csv', 'w') as menuFile:
-    pass
+print('\n\n---Menu Section---')
+with open('menu.csv', 'w+') as menuFile:
+    writer = csv.writer(menuFile)
+    writer.writerows(menu)

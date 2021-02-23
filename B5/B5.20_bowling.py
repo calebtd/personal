@@ -22,11 +22,15 @@ def print_table(dictionary, sorter=False):  # Pass the dictionary, pass a sorter
                 keys = f'*{keys}'
             print(f'{keys:{longest_key}} - {values}')
     else:
-        # Use a lambda to choose which thing to sort by
-        for keys, values in sorted(dictionary.items(), key=lambda x: x[sorter]):
-            if values == 300:
-                keys = f'*{keys}'
-            print(f'{keys:{longest_key}} - {values}')
+        pass
+
+    print()
+    for w in sorted(dictionary, key=dictionary.get, reverse=True):
+        print(f'{w:{longest_key}} - {dictionary[w]}')
+
+    print()
+    for w in sorted(dictionary):
+        print(w, dictionary[w])
 
 
 # Establish dictionary
@@ -54,11 +58,12 @@ while True:
 # Print in input order
 print_table(scores)
 
+
 # Print in numerical order
-print_table(scores, 1)  # The 1 is for the lambda, sort by the value index
+# print_table(scores, 1)  # The 1 is for the lambda, sort by the value index
 
 # Print in alphabetical order
-print_table(scores, 0)  # The 0 is for the lambda, sort by the key index
+# print_table(scores, 0)  # The 0 is for the lambda, sort by the key index
 
 
 # Get the key for max and min values
@@ -73,7 +78,6 @@ for val in scores.values():
     addedScore += val
 averageScore = addedScore // len(scores)
 print(f"The team average score is {averageScore}.")
-
 
 with open('game_results.txt', 'w') as resultsFile:
     pass

@@ -9,7 +9,6 @@ import csv
 # Var,Name,Price,Ingredients
 # deluxeChickenInfo,Deluxe Chicken Sandwich,3.65,"Chicken, Buns, Pickle, Tomato, Lettuce, Cheese"
 # saladInfo,Side Salad,2.89,"Mixed Greens, Cheese, Grape Tomatoes, Bell Peppers, Dressing"
-# calebInfo,Caleb,45.00,"Water,People Stuff"
 
 
 # # Problem 1

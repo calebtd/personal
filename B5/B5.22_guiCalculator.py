@@ -1,81 +1,86 @@
+# Caleb Dillenbeck
+# B5 Programming 1 - Mr. Blair
+# GUI Calculator
+# I did not copy anyone
+
 import tkinter as tk
-from tkinter import messagebox
 from tkinter import *
 
+
+# Function for calc buttons and text boxes
+def button_click(key):
+    print("Button pressed -> " + key)
+    global clear
+    if key == '=':
+        try:
+            bottomText.delete(1.0, END)
+            txt_input = topText.get(1.0, END)
+            bottomText.insert(tk.END, eval(txt_input))
+            clear = True
+        except SyntaxError:
+            bottomText.insert(tk.END, 'Syntax Error')
+            print('Syntax Error')
+        except ZeroDivisionError:
+            bottomText.insert(tk.END, 'Zero Division')
+            print('Zero Division')
+    elif key == '+/-':
+        topText.insert(1.0, '-')
+    elif key == 'C':
+        topText.delete(1.0, END)
+        bottomText.delete(1.0, END)
+    elif key == '⌫':
+        topText.delete('end -2 chars', END)
+    else:
+        if clear:
+            topText.delete(1.0, END)
+            clear = False
+        topText.insert(tk.END, key)
+
+
+# Initials. Set variable, color, size, and title
 win = tk.Tk()
 win['bg'] = '#202020'
 win.title("Calculator")
-win.geometry("302x320")
+win.geometry("302x350")
+clear = False  # Used later for the function
 
-topFrame = tk.Frame(win, bg='grey')
-topFrame.grid(row=1, column=0)
+# Set Frames. Sticky sticks it to the windows border. It halfway worked
+btnFrame = tk.Frame(win, bg="pink")
+btnFrame.grid(row=2, column=0, sticky=N + S + E + W)
 
 
-topText = tk.Text(topFrame, width=27, height=1)
+# Text boxes. One for input, one for results
+topText = tk.Text(win, width=36, height=1)
 topText.grid(row=0, column=0, padx=4, pady=1)
 
-bottomText = tk.Text(topFrame, width=27, height=1.5)
+bottomText = tk.Text(win, width=36, height=1.5)
 bottomText.grid(row=1, column=0, padx=4, pady=1)
 
-btnOne = tk.Button(topFrame, text='=', width=9, height=3, command=lambda button='=': button_click(button))
-btnOne.grid(row=0, column=1, rowspan=2, padx=1, pady=1)
+
+# These variables are used in the following
+# loops to name the buttons
+zero = ('+/-', 'C', '⌫', '/')
+one = ('7', '8', '9', '*')
+two = ('4', '5', '6', '-')
+three = ('1', '2', '3', '+')
+
+order = (zero, one, two, three)
+
+for num, y in enumerate(order):
+    for idx, x in enumerate(y):
+        btn = tk.Button(btnFrame, text=x, width=9, height=3, command=lambda button=x: button_click(button))
+        btn.grid(row=num, column=idx, padx=1, pady=1)
 
 
-btnFrame = tk.Frame(win, bg="pink")
-btnFrame.grid(row=2, column=0)
+# Other buttons that don't fit in
+btn = tk.Button(btnFrame, text='0', width=20, height=3, command=lambda button='0': button_click(button))
+btn.grid(row=5, column=0, columnspan=2, padx=1, pady=1)
 
+btn = tk.Button(btnFrame, text='.', width=9, height=3, command=lambda button='.': button_click(button))
+btn.grid(row=5, column=2, padx=1, pady=1)
 
-def button_click(key):
-    print("Button pressed =>" + key)
+btn = tk.Button(btnFrame, text='=', width=9, height=3, command=lambda button='=': button_click(button))
+btn.grid(row=5, column=3, padx=1, pady=1)
 
-
-btnOne = tk.Button(btnFrame, text='0', width=20, height=3, command=lambda button='0': button_click(button))
-btnOne.grid(row=5, column=1, columnspan=2, padx=1, pady=1)
-
-btnOne = tk.Button(btnFrame, text='1', width=9, height=3, command=lambda button='1': button_click(button))
-btnOne.grid(row=4, column=1, padx=1, pady=1)
-
-btnOne = tk.Button(btnFrame, text='2', width=9, height=3, command=lambda button='2': button_click(button))
-btnOne.grid(row=4, column=2, padx=1, pady=1)
-
-btnOne = tk.Button(btnFrame, text='3', width=9, height=3, command=lambda button='3': button_click(button))
-btnOne.grid(row=4, column=3, padx=1, pady=1)
-
-btnOne = tk.Button(btnFrame, text='4', width=9, height=3, command=lambda button='4': button_click(button))
-btnOne.grid(row=3, column=1, padx=1, pady=1)
-
-btnOne = tk.Button(btnFrame, text='5', width=9, height=3, command=lambda button='5': button_click(button))
-btnOne.grid(row=3, column=2, padx=1, pady=1)
-
-btnOne = tk.Button(btnFrame, text='6', width=9, height=3, command=lambda button='6': button_click(button))
-btnOne.grid(row=3, column=3, padx=1, pady=1)
-
-btnOne = tk.Button(btnFrame, text='7', width=9, height=3, command=lambda button='7': button_click(button))
-btnOne.grid(row=2, column=1, padx=1, pady=1)
-
-btnOne = tk.Button(btnFrame, text='8', width=9, height=3, command=lambda button='8': button_click(button))
-btnOne.grid(row=2, column=2, padx=1, pady=1)
-
-btnOne = tk.Button(btnFrame, text='9', width=9, height=3, command=lambda button='9': button_click(button))
-btnOne.grid(row=2, column=3, padx=1, pady=1)
-
-btnOne = tk.Button(btnFrame, text='.', width=9, height=3, command=lambda button='.': button_click(button))
-btnOne.grid(row=5, column=3, padx=1, pady=1)
-
-# btnOne = tk.Button(btnFrame, text='=', width=9, height=3, command=lambda button='=': button_click(button))
-# btnOne.grid(row=5, column=5, padx=1, pady=1)
-
-btnOne = tk.Button(btnFrame, text='+', width=9, height=3, command=lambda button='+': button_click(button))
-btnOne.grid(row=4, column=5, padx=1, pady=1)
-
-btnOne = tk.Button(btnFrame, text='-', width=9, height=3, command=lambda button='-': button_click(button))
-btnOne.grid(row=3, column=5, padx=1, pady=1)
-
-btnOne = tk.Button(btnFrame, text='*', width=9, height=3, command=lambda button='*': button_click(button))
-btnOne.grid(row=2, column=5, padx=1, pady=1)
-
-btnOne = tk.Button(btnFrame, text='/', width=9, height=3, command=lambda button='/': button_click(button))
-btnOne.grid(row=5, column=5, padx=1, pady=1)
-
-
+# Run
 win.mainloop()

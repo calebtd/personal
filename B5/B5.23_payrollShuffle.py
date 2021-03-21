@@ -26,9 +26,27 @@ class Employee:
         return gross, net
 
 
+def parse_employees():
+    num_employees = int(len(dataList) / 4)
+    for x in range(num_employees):
+        idx = x * 4
+        p_number = int(dataList[idx])
+        p_name = dataList[idx + 1]
+        p_address = dataList[idx + 2]
+        p_wage = float(dataList[idx + 3].split()[0])
+        p_hours = float(dataList[idx + 3].split()[1])
+        emp = Employee(p_number, p_name, p_address, p_wage, p_hours)
+        employeeList.append(emp)
+
+
+dataList = []
+employeeList = []
+
 Tk().withdraw()
 filename = askopenfilename()
-
+# filename = 'data.txt'
 with open(filename) as data:
     for line in data:
-        print(line, end='')
+        dataList.append(line.strip('\n'))
+
+parse_employees()

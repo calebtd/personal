@@ -24,7 +24,6 @@ class Employee:
             gross = self.wage * self.hours
 
         net = gross - (gross * .20) - (gross * .075)
-
         return f'${net}'
 
 
@@ -41,8 +40,16 @@ def parse_employees():
         employeeList.append(emp)
 
 
-def do_nothing():
-    print('say hello')
+def data_clear():
+    global pageNum
+    global dataList
+    global employeeList
+    pageNum = 0
+    dataList = []
+    employeeList = []
+    text1.set('')
+    text2.set('')
+    text3.set('')
 
 
 def page(key):
@@ -62,32 +69,30 @@ def page(key):
 def open_file():
     root = Tk()
     root.withdraw()
-    filename = filedialog.askopenfilename()
+    path = filedialog.askopenfilename()
     root.destroy()
-    return filename
+    with open(path) as data:
+        for line in data:
+            dataList.append(line.strip('\n'))
+    parse_employees()
 
 
 dataList = []
 employeeList = []
-
-path = open_file()
-with open(path) as data:
-    for line in data:
-        dataList.append(line.strip('\n'))
-
-
-parse_employees()
+pageNum = 0
 
 win = tk.Tk()
 win.title("FluffShuffle Electronics")
 win.geometry("400x300")
 
-menuBar = tk.Menu(win)
-fileMenu = tk.Menu(menuBar, tearoff=0)
-fileMenu.add_command(label="Open", command=do_nothing)
+menuBar = Menu(win)
+fileMenu = Menu(menuBar, tearoff=0)
+fileMenu.add_command(label="Open", command=lambda: [data_clear(), open_file(), page(False)])
 fileMenu.add_separator()
 fileMenu.add_command(label="Exit", command=win.quit)
 menuBar.add_cascade(label="File", menu=fileMenu)
+
+open_file()
 
 win.columnconfigure([0, 1], weight=1, minsize=50)
 win.rowconfigure([0, 1, 2, 3, 4, 5, 6, 7], weight=1, minsize=50)
@@ -97,7 +102,6 @@ for idx, x in enumerate(labelList):
     lbl = tk.Label(text=x)
     lbl.grid(row=idx, column=0)
 
-pageNum = 0
 text1 = tk.StringVar()
 text2 = tk.StringVar()
 text3 = tk.StringVar()
@@ -112,7 +116,6 @@ ent2.grid(row=1, column=1, sticky=tk.W, pady=3)
 
 ent3 = tk.Entry(width=20, textvariable=text3)
 ent3.grid(row=2, column=1, sticky=tk.W, pady=3)
-
 
 btn = ttk.Button(win, text='Previous', command=lambda: page(False))
 btn.grid(row=5, column=0, sticky=tk.E)

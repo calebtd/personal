@@ -3,8 +3,10 @@
 # Payroll for FluffShuffle Electronics
 # I did not copy anyone
 
-from tkinter import Tk
-from tkinter.filedialog import askopenfilename
+import tkinter as tk
+from tkinter import filedialog
+from tkinter import ttk
+from tkinter import *
 
 
 class Employee:
@@ -23,30 +25,103 @@ class Employee:
 
         net = gross - (gross * .20) - (gross * .075)
 
-        return gross, net
+        return f'${net}'
 
 
 def parse_employees():
     num_employees = int(len(dataList) / 4)
-    for x in range(num_employees):
-        idx = x * 4
-        p_number = int(dataList[idx])
-        p_name = dataList[idx + 1]
-        p_address = dataList[idx + 2]
-        p_wage = float(dataList[idx + 3].split()[0])
-        p_hours = float(dataList[idx + 3].split()[1])
+    for _ in range(num_employees):
+        p_idx = _ * 4
+        p_number = int(dataList[p_idx])
+        p_name = dataList[p_idx + 1]
+        p_address = dataList[p_idx + 2]
+        p_wage = float(dataList[p_idx + 3].split()[0])
+        p_hours = float(dataList[p_idx + 3].split()[1])
         emp = Employee(p_number, p_name, p_address, p_wage, p_hours)
         employeeList.append(emp)
+
+
+def do_nothing():
+    print('say hello')
+
+
+def page(key):
+    global pageNum
+    num_employees = int(len(dataList) / 4)
+    if key:
+        if pageNum < num_employees - 1:
+            pageNum += 1
+    elif not key:
+        if pageNum >= 1:
+            pageNum -= 1
+    text1.set(employeeList[pageNum].name)
+    text2.set(employeeList[pageNum].address)
+    text3.set(employeeList[pageNum].calc_salary())
+
+
+def open_file():
+    root = Tk()
+    root.withdraw()
+    filename = filedialog.askopenfilename()
+    root.destroy()
+    return filename
 
 
 dataList = []
 employeeList = []
 
-Tk().withdraw()
-filename = askopenfilename()
-# filename = 'data.txt'
-with open(filename) as data:
+path = open_file()
+with open(path) as data:
     for line in data:
         dataList.append(line.strip('\n'))
 
+
 parse_employees()
+
+win = tk.Tk()
+win.title("FluffShuffle Electronics")
+win.geometry("400x300")
+
+menuBar = tk.Menu(win)
+fileMenu = tk.Menu(menuBar, tearoff=0)
+fileMenu.add_command(label="Open", command=do_nothing)
+fileMenu.add_separator()
+fileMenu.add_command(label="Exit", command=win.quit)
+menuBar.add_cascade(label="File", menu=fileMenu)
+
+win.columnconfigure([0, 1], weight=1, minsize=50)
+win.rowconfigure([0, 1, 2, 3, 4, 5, 6, 7], weight=1, minsize=50)
+
+labelList = ['Name: ', 'Address: ', 'Net Pay: ']
+for idx, x in enumerate(labelList):
+    lbl = tk.Label(text=x)
+    lbl.grid(row=idx, column=0)
+
+pageNum = 0
+text1 = tk.StringVar()
+text2 = tk.StringVar()
+text3 = tk.StringVar()
+
+page(None)
+
+ent1 = tk.Entry(width=40, textvariable=text1)
+ent1.grid(row=0, column=1, sticky=tk.W, pady=3)
+
+ent2 = tk.Entry(width=40, textvariable=text2)
+ent2.grid(row=1, column=1, sticky=tk.W, pady=3)
+
+ent3 = tk.Entry(width=20, textvariable=text3)
+ent3.grid(row=2, column=1, sticky=tk.W, pady=3)
+
+
+btn = ttk.Button(win, text='Previous', command=lambda: page(False))
+btn.grid(row=5, column=0, sticky=tk.E)
+
+btn = ttk.Button(win, text='Next', command=lambda: page(True))
+btn.grid(row=5, column=1, sticky=tk.W)
+
+win.config(menu=menuBar)
+win.attributes('-topmost', True)
+win.update()
+win.attributes('-topmost', False)
+win.mainloop()

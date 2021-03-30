@@ -3,6 +3,11 @@
 # Payroll for FluffShuffle Electronics
 # I did not copy anyone
 
+# This program will read a company's employee data from a file and display it in a Tkinter GUI.
+# It needs to use list, vars, and/or classes to organize data.
+
+# It 
+
 # Import needed libraries
 import tkinter as tk
 from tkinter import filedialog
@@ -35,8 +40,11 @@ class Employee:
 
 # Bring in the list with the file contents, sort it...
 def parse_employees():
+    # Employee info comes in blocks of 4. Divide the whole thing
+    # by four to figure out how many employees are in the file
     num_employees = int(len(dataList) / 4)
     for _ in range(num_employees):
+        # This index will go to the next employee on each iteration
         p_idx = _ * 4
         p_number = int(dataList[p_idx])
         p_name = dataList[p_idx + 1]
@@ -65,7 +73,7 @@ def data_clear():
 def page(key):  # Passing in True advances a page, False goes back
     global pageNum
     num_employees = int(len(dataList) / 4)
-    # Don't go below the first page or above the amount of pages
+    # Don't go below the first page or above the max amount of pages
     if key:
         if pageNum < num_employees - 1:
             pageNum += 1
@@ -78,12 +86,13 @@ def page(key):  # Passing in True advances a page, False goes back
     text3.set(employeeList[pageNum].calc_salary())
 
 
-# File dialogue and save the file contents to a list
+# Open the file dialogue and insert the file contents to a list
 def open_file():
     root = Tk()
     root.withdraw()  # Don't open another window, only the file picker
     path = filedialog.askopenfilename()
     root.destroy()
+    # Open the file picked, insert each line into the list
     with open(path) as data:
         for line in data:
             dataList.append(line.strip('\n'))
@@ -92,7 +101,7 @@ def open_file():
 
 
 # Start of the program
-# Make vars/lists
+# Make needed vars/lists
 dataList = []
 employeeList = []
 pageNum = 0
@@ -100,19 +109,20 @@ pageNum = 0
 # Let's get crackin'! Open the file, start parsing data
 open_file()
 
-# Define the window
+# Define the Tkinter window
 win = tk.Tk()
 win.title("FluffShuffle Electronics")
 win.geometry("400x300")
+win.minsize(350, 175)
 
 # These make the window resizeable
 win.columnconfigure([0, 1], weight=1, minsize=50)
 win.rowconfigure([0, 1, 2, 3, 4, 5, 6, 7], weight=1, minsize=50)
 
-# Make the 'File' Menu
+# Make the 'File' Menu with: open a new file, and exit the program
 menuBar = Menu(win)
 fileMenu = Menu(menuBar, tearoff=0)
-fileMenu.add_command(label="Open", command=lambda: [data_clear(), open_file(), page(False)])
+fileMenu.add_command(label="Open", command=lambda: [data_clear(), open_file(), page(None)])
 fileMenu.add_separator()
 fileMenu.add_command(label="Exit", command=win.quit)
 menuBar.add_cascade(label="File", menu=fileMenu)
@@ -152,8 +162,10 @@ page(None)
 
 # Start the GUI
 win.config(menu=menuBar)
+
 # These bring the window to the front, then disables staying at front
 win.attributes('-topmost', True)
 win.update()
 win.attributes('-topmost', False)
+
 win.mainloop()

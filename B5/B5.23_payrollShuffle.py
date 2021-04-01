@@ -1,12 +1,17 @@
 # Caleb Dillenbeck
 # B5 Programming 1 - Mr. Blair
 # Payroll for FluffShuffle Electronics
+# Due April 16
 # I did not copy anyone
 
 # This program will read a company's employee data from a file and display it in a Tkinter GUI.
 # It needs to use list, vars, and/or classes to organize data.
 
-# It 
+# First, it has the Employee class, that gets the data and calculates salary.
+# It has lots of functions for the different steps, including: picking/opening
+# the file, parsing file data into variables and classes, changing pages on the
+# GUI, and clearing the data when a new file is opened. It then sets up the
+# window and uses the data from the functions to fill it in.
 
 # Import needed libraries
 import tkinter as tk
@@ -18,6 +23,7 @@ from tkinter import *
 # Define the employee class. Brings in the info on init,
 # calculates the salary in the function.
 class Employee:
+    """Takes all the variable needed to create and employee object"""
     def __init__(self, number, name, address, wage, hours):
         self.number = number
         self.name = name
@@ -26,6 +32,8 @@ class Employee:
         self.hours = hours
 
     def calc_salary(self):
+        """Takes the employee's wage and hours to calculate
+        pay after overtime and deductions. Returns net pay as a string"""
         # If overtime, normal wage plus time and a half on remaining hours
         if self.hours > 40:
             gross = (self.wage * 40) + ((self.hours - 40) * (self.wage * 1.5))
@@ -34,30 +42,33 @@ class Employee:
 
         # Deductions
         net = gross - (gross * .20) - (gross * .075)
+
         # Return in USD format with 2 decimals
         return f'${net:,.2f}'
 
 
-# Bring in the list with the file contents, sort it...
-def parse_employees():
+def parse_employees(p_datalist):
+    """Takes a list with the file's content, sorts it into individual
+    variables, and creates objects with those vars. No returns"""
     # Employee info comes in blocks of 4. Divide the whole thing
     # by four to figure out how many employees are in the file
-    num_employees = int(len(dataList) / 4)
+    num_employees = int(len(p_datalist) / 4)
     for _ in range(num_employees):
         # This index will go to the next employee on each iteration
         p_idx = _ * 4
-        p_number = int(dataList[p_idx])
-        p_name = dataList[p_idx + 1]
-        p_address = dataList[p_idx + 2]
-        p_wage = float(dataList[p_idx + 3].split()[0])
-        p_hours = float(dataList[p_idx + 3].split()[1])
-        # ...make the objects, and stick em' in a list
+        p_number = int(p_datalist[p_idx])
+        p_name = p_datalist[p_idx + 1]
+        p_address = p_datalist[p_idx + 2]
+        p_wage = float(p_datalist[p_idx + 3].split()[0])
+        p_hours = float(p_datalist[p_idx + 3].split()[1])
+
+        # Make the objects, and stick em' in a list
         emp = Employee(p_number, p_name, p_address, p_wage, p_hours)
         employeeList.append(emp)
 
 
-# Clears out the data when opening a new file
 def data_clear():
+    """Clears out the variables and lists when opening a new file"""
     global pageNum
     global dataList
     global employeeList
@@ -70,7 +81,9 @@ def data_clear():
 
 
 # Show the correct info on the correct UI page
-def page(key):  # Passing in True advances a page, False goes back
+def page(key):
+    """Takes True or False to move forward or backward a page in the GUI.
+    It sets the text in each of the entry boxes. No returns"""
     global pageNum
     num_employees = int(len(dataList) / 4)
     # Don't go below the first page or above the max amount of pages
@@ -80,14 +93,15 @@ def page(key):  # Passing in True advances a page, False goes back
     elif not key:
         if pageNum >= 1:
             pageNum -= 1
-    # Set the text in each of the entries based on page number
+
     text1.set(employeeList[pageNum].name)
     text2.set(employeeList[pageNum].address)
     text3.set(employeeList[pageNum].calc_salary())
 
 
-# Open the file dialogue and insert the file contents to a list
 def open_file():
+    """Opens the file dialogue and inserts each line into a list.
+    Calls the parse_employees function with the list when done"""
     root = Tk()
     root.withdraw()  # Don't open another window, only the file picker
     path = filedialog.askopenfilename()
@@ -96,8 +110,8 @@ def open_file():
     with open(path) as data:
         for line in data:
             dataList.append(line.strip('\n'))
-    # Call the parse function
-    parse_employees()
+
+    parse_employees(dataList)
 
 
 # Start of the program

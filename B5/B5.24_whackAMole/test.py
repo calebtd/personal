@@ -22,10 +22,18 @@ def display_no_snake():
     lblOne.after(2000, display_snake)
 
 
+def label_click(event):
+    print(event)
+    widget = event.widget
+    if widget['image'] == noSnakeImg.name:
+        # no snake image was clicked
+        print('The image with no snake was clicked')
+
+
 lblOne = tk.Label(win, image=noSnakeImg)
 lblOne.grid(row=0, column=0)
+lblOne.bind("<ButtonPress-1>", label_click)
 
 display_snake()
-
 
 win.mainloop()

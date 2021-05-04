@@ -1,3 +1,4 @@
+import time
 import tkinter as tk
 from tkinter import PhotoImage
 import math
@@ -11,7 +12,6 @@ class Game:
         self.data = settings_dict
         self.win = window
 
-        x = y = 256
         image0 = PhotoImage(file="sprite_0.png")
         image1 = PhotoImage(file="sprite_1.png")
         image2 = PhotoImage(file="sprite_2.png")
@@ -20,22 +20,24 @@ class Game:
 
         self.lbl = tk.Label(self.win)
         self.lbl.grid(row=row, column=column)
+        self.lbl.bind("<ButtonPress-1>", self.label_click)
 
     def run(self):
         self.lbl['image'] = self.image_list[0]
-        self.lbl.bind("<ButtonPress-1>", self.label_click)
-        random_under = random.randint(0, self.data["max_under"])
-        self.timerID = self.lbl.after(random_under, self.disappear)
+        self.disappear()
 
     def appear(self):
         # swap out the image of labelOne
-        print('Event Triggered')
+        # print('Event Triggered')
         self.lbl['image'] = self.image_list[1]
-        self.timerID = self.lbl.after(1000, self.disappear)
+        rand = random.randint(self.data["min_under"], self.data["max_under"]) * 1000
+        print(rand)
+        self.timerID = self.lbl.after(rand, self.disappear)
 
     def disappear(self):
         self.lbl['image'] = self.image_list[0]
-        self.timerID = self.lbl.after(2000, self.appear)
+        rand = random.randint(self.data["min_above"], self.data["max_above"]) * 1000
+        self.timerID = self.lbl.after(rand, self.appear)
 
     def label_click(self, event):
         print(event)
@@ -43,6 +45,7 @@ class Game:
         if widget['image'] == self.image_list[1].name:
             self.lbl['image'] = self.image_list[2]
             self.lbl.after_cancel(self.timerID)
+            return True
 
 
 if __name__ == '__main__':
@@ -54,13 +57,17 @@ if __name__ == '__main__':
                 "min_under": 1,
                 "max_under": 5,
                 "min_above": 1,
-                "max_above": 3,
+                "max_above": 1,
                 "time": 30}
     moleList = []
-    for x in range(2):
-        moleList.append(Game(win, settings, x, x))
+
+    for x in range(3):
+        for y in range(3):
+            moleList.append(Game(win, settings, x, y))
+    print(moleList)
     for x in moleList:
         x.run()
+        time.sleep(.1)
     win.mainloop()
 
     print('done')

@@ -1,23 +1,22 @@
-import random
-import time
-import tkinter as tk
-from tkinter import PhotoImage
+from random import randint
+from time import *
+from tkinter import *
+from tkinter import messagebox
+
 
 # TODO
-# Add timer
-# Format window
 # Format moles (closest square)
 
 
 def appear(label):
     label['image'] = image_list[1]
-    rand = random.randint(1, 1) * 1000
+    rand = randint(1, 1) * 1000
     label_data[label] = label.after(rand, lambda: disappear(label))
 
 
 def disappear(label):
     label['image'] = image_list[0]
-    rand = random.randint(1, 5) * 1000
+    rand = randint(1, 5) * 1000
     label_data[label] = label.after(rand, lambda: appear(label))
 
 
@@ -26,12 +25,43 @@ def label_click(event):
     if widget['image'] == image_list[1].name:
         widget['image'] = image_list[2]
         widget.after_cancel(label_data[widget])
+        del label_data[widget]
 
 
-win = tk.Tk()
+def timer(_id):
+    global timer_time
+    timer_time = float(f'{timer_time - .1:.1f}')
+    timeText.set(timer_time)
+
+    print(timer_time)
+    if label_data:
+        if timer_time == 0.0:
+            for _x, _y in label_data.items():
+                _x.after_cancel(_y)
+            win.after_cancel(_id)
+            again = messagebox.askquestion(title='Game Over', message='You ran out of time! Try again?')
+            win.destroy()
+            if again:
+                pass
+
+        else:
+            new_id = win.after(100, lambda: timer(new_id))
+    else:
+        messagebox.showinfo(title='Game Over', message='Congrats! You win!')
+
+
+win = Tk()
 win.title('whack test')
-win.geometry('512x512')
-win.minsize(512, 512)
+
+frame1 = Frame(win)
+frame2 = Frame(win, background='#D3D3D3', padx=1, pady=1)
+frame1.pack()
+frame2.pack(padx=10, pady=10)
+
+timeText = StringVar()
+
+lbl1 = Label(frame1, text='Time:', font=('Agency FB', 40)).grid(row=0, column=0)
+lbl2 = Label(frame1, font=('Agency FB', 40), textvariable=timeText, width=5, anchor=W).grid(row=0, column=1)
 
 image0 = PhotoImage(file="sprite_0.png")
 image1 = PhotoImage(file="sprite_1.png")
@@ -43,16 +73,24 @@ label_data = {}
 # ------------------------------------
 
 for x in range(3):
-    for y in range(3):
-        lbl = tk.Label(win, image=image_list[0])
-        lbl.grid(row=x, column=y)
+    for y in range(4):
+        lbl = Label(frame2, image=image_list[0])
+        lbl.grid(row=x, column=y, padx=1, pady=1)
         lbl.bind("<ButtonPress-1>", label_click)
         timerID = lbl.after(0, lambda: None)
         label_data[lbl] = timerID
 
 for x, y in label_data.items():
-    time.sleep(.1)
+    sleep(.1)
     disappear(x)
 
-time.sleep(.2)
+win.update()
+win.minsize(win.winfo_width(), win.winfo_height())
+
+timer_time = 5
+timeText.set(timer_time)
+
+timer(None)
+
+sleep(.2)
 win.mainloop()

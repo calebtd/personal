@@ -1,3 +1,8 @@
+# Caleb Dillenbeck
+# B5 Programming 1 - Mr. Blair
+# Whack A Mole - FINAL PROGRAM
+# I did not copy anyone
+
 from random import randint
 from time import *
 from tkinter import *
@@ -7,6 +12,23 @@ from math import *
 import json
 import os
 
+
+# This is my Whack-a-mole full project. When it runs, it opens the welcome screen. From there you can either
+# start the game right away, or change the settings before you start. Then it runs the gameplay. Once you win
+# or lose, it will ask if you want to play again.
+
+# I create three classes in the program. One for the Welcome screen, one for the Settings with or
+# without a GUI, and one for the actual gameplay. The program only calls Welcome() at the bottom, and it
+# references the rest of the classes within the code.
+
+# The welcome screen runs the settings class when you hit a button, with a bool as a param.
+
+# The settings class takes that bool to run with a GUI or not. If a settings file exists, it will scrape
+# the data and use that as the settings. Otherwise it will use the default values. When you hit save on
+# the GUI, it grabs the data you set and saves it to a file IF it's different than the default values
+# It then runs the gameplay with the final settings data
+
+# The game class builds a grid, adds labels with the mole images, and starts the timer.
 
 class Welcome:
     def __init__(self):
@@ -225,7 +247,8 @@ class Game:
                 if response == 'yes':
                     self.run_again()
                 if response == 'no':
-                    quit()
+                    self.win.destroy()
+                    Welcome()
             else:
                 new_id = self.win.after(100, lambda: self.timer(new_id))
         else:
@@ -233,7 +256,8 @@ class Game:
             if response == 'yes':
                 self.run_again()
             if response == 'no':
-                quit()
+                self.win.destroy()
+                Welcome()
 
     def run_again(self):
         self.win.destroy()

@@ -1,11 +1,8 @@
-from random import randint
-from time import *
 from tkinter import *
-from tkinter import ttk
 from tkinter import messagebox
-from math import *
-import os
+from tkinter import ttk
 import json
+import os
 
 
 class Settings:

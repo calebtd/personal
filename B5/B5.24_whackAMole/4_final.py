@@ -1,173 +1,244 @@
-# Caleb Dillenbeck
-# B5 Programming 1 - Mr. Blair
-# Whack A Mole - GAMEPLAY (FINAL)
-# I did not copy anyone
-
-import time
-from datetime import datetime
-
-import tkinter as tk
+from random import randint
+from time import *
 from tkinter import *
-from tkinter import ttk
 from tkinter import messagebox
-import PIL.Image
-import PIL.ImageTk
-
+from tkinter import ttk
+from math import *
 import json
 import os
 
 
-# startTime = datetime.now()
-# print(startTime)
-# time.sleep(2)
-# stopTime = datetime.now()
-# print(stopTime)
-#
-# diff = (stopTime - startTime).total_seconds()
-# print(diff)
+class Welcome:
+    def __init__(self):
+        self.win = Tk()
+        self.win.title("Whack-a-Mole")
+        self.win.config(bg='black')
 
+        frame1 = Frame(self.win, bg='black')
+        frame2 = Frame(self.win, bg='black')
+        frame1.pack()
+        frame2.pack()
 
-def welcome_screen():
-    def on_enter(lbl):
-        lbl.configure(borderwidth=2)
+        Label(frame1, text="Welcome to \nWhack-a-Mole",
+              font=('Bahnschrift', 50), fg='white', bg='black').pack()
+        Label(frame1, height=5, bg='black').pack()
 
-    def on_leave(lbl):
-        lbl.configure(borderwidth=1)
+        for x, y in enumerate(('Settings', 'Start')):
+            z = Button(frame2, text=y, font=('Bahnschrift', 15), fg='white', bg='black', activeforeground='white',
+                       activebackground='grey', width=12, height=2, relief='ridge')
+            z.config(command=lambda i=x: self.close(i))
+            z.grid(row=2, column=x, padx=10, pady=10)
+            z.bind("<Enter>", self.on_enter)
+            z.bind("<Leave>", self.on_leave)
+        self.win.mainloop()
 
-    x = 512
-    y = 512
-    welcome_win = tk.Tk()
-    welcome_win.title("Whack-a-Mole")
-    welcome_win['bg'] = 'black'
-    welcome_win.geometry(f'{x}x{y}')
-    welcome_win.minsize(x, y)
-    welcome_win.maxsize(x, y)
+    def close(self, btn):
+        self.win.destroy()
+        if btn == 0:
+            Settings(True)
+        elif btn == 1:
+            Settings(False)
 
-    file = open('welcome.png', 'rb')
-    welcome_image = PIL.ImageTk.PhotoImage(PIL.Image.open(file).resize((x, y - 50)))
-    welcome_lbl = tk.Label(image=welcome_image)
-    welcome_lbl['borderwidth'] = 0
-    welcome_lbl.pack(pady=5)
+    @staticmethod
+    def on_enter(btn):
+        btn.widget.config(relief='sunken')
 
-    file = open('settings.png', 'rb')
-    settings_image = PIL.ImageTk.PhotoImage(PIL.Image.open(file).resize((200, 25)))
-    settings_lbl = tk.Label(image=settings_image)
-    settings_lbl['borderwidth'] = 1
-    settings_lbl.place(relx=0.3, rely=0.96, anchor=CENTER)
-    settings_lbl.bind("<Button-1>", lambda arg: run_settings(True, welcome_win))
-    settings_lbl.bind("<Enter>", lambda arg: on_enter(settings_lbl))
-    settings_lbl.bind("<Leave>", lambda arg: on_leave(settings_lbl))
-
-    file = open('start.png', 'rb')
-    start_image = PIL.ImageTk.PhotoImage(PIL.Image.open(file).resize((130, 25)))
-    start_lbl = tk.Label(image=start_image)
-    start_lbl['borderwidth'] = 1
-    start_lbl.place(relx=0.74, rely=0.96, anchor=CENTER)
-    start_lbl.bind("<Button-1>", lambda arg: run_settings(False, welcome_win))
-    start_lbl.bind("<Enter>", lambda arg: on_enter(start_lbl))
-    start_lbl.bind("<Leave>", lambda arg: on_leave(start_lbl))
-
-    welcome_win.mainloop()
-
-
-def run_settings(val, window):
-    global screen_bool
-    if val:
-        screen_bool = True
-    else:
-        screen_bool = False
-    window.destroy()
+    @staticmethod
+    def on_leave(btn):
+        btn.widget.config(relief='ridge')
 
 
 class Settings:
     def __init__(self, arg):
-        self.filename = 'WAMsettings.json'
         self.json_default = {"num_moles": 9,
                              "min_under": 1,
                              "max_under": 5,
                              "min_above": 1,
-                             "max_above": 3,
-                             "time": 30}
+                             "max_above": 1,
+                             "time": 20}
 
-        self.win = tk.Tk()
-        self.win.title("Game Settings")
-        self.win.geometry('300x300')
-        self.win.minsize(250, 225)
-        config = [0, 1, 2, 3, 4, 5, 6, 7]
-        self.win.columnconfigure([0, 1], weight=1, minsize=50)
-        self.win.rowconfigure(config, weight=1, minsize=10)
+        self.label_key = (('Number of Moles:', 'num_moles'), ('Min time underground:', 'min_under'),
+                          ('Max time underground:', 'max_under'), ('Min time above ground:', 'min_above'),
+                          ('Max time above ground:', 'max_above'), ('Game time (seconds):', 'time'))
 
-        self.labels = ['Number of Moles:', 'Min time underground:', 'Max time underground:',
-                       'Min time above ground:', 'Max time above ground:', 'Game time (seconds):']
-        self.json_keys = ['num_moles', 'min_under', 'max_under', 'min_above', 'max_above', 'time']
-
-        self.data_values = []
-        self.entries = []
-        self.p_data = {}
-        self.final_data = {}
-
+        self.filename = 'WAMsettings.json'
         if os.path.exists(self.filename):
             with open(self.filename) as f:
-                self.data = json.load(f)
+                try:
+                    self.data = json.load(f)
+                except json.JSONDecodeError:
+                    print('Error loading JSON, using default values')
+                    self.data = self.json_default
         else:
             self.data = self.json_default
 
+        self.final_data = {}
+        self.entries = []
+        self.win = None
+
         if arg:
-            self.settings_screen()
-        if not arg:
-            self.no_screen()
+            self.gui()
+        elif not arg:
+            self.no_gui()
 
-    def save(self):
-        saved_settings = []
-        for _ in self.entries:
+    def gui(self):
+        self.win = Tk()
+        self.win.title('Game Settings')
+        self.win.geometry('300x300')
+        self.win.minsize(290, 290)
+        self.win.maxsize(320, 320)
+        # self.win.config(bg='black')
+        frame = Frame(self.win)
+        frame.pack(padx=5, pady=5)
+
+        for x, y in enumerate(self.label_key):
+            Label(frame, text=y[0], width=19, anchor=E).grid(row=x, column=0, padx=6)
+
+            z = Entry(frame, width=5)
+
             try:
-                saved_settings.append(int(_.get()))
-            except ValueError:
-                tk.messagebox.showerror("Error", "Please input whole numbers")
-                return
+                z.insert(0, self.data[y[1]])
+            except KeyError:
+                print(f"Error loading '{y[1]}'. Using default value")
+                z.insert(0, self.json_default[y[1]])
 
-        for idx, _ in enumerate(self.json_keys):
-            self.p_data[_] = saved_settings[idx]
+            z.grid(row=x, column=1, padx=6, pady=10)
+            self.entries.append(z)
 
-        if not saved_settings == self.data_values:
-            with open(self.filename, 'w') as f:
-                json.dump(self.p_data, f, indent=4)
-
-        self.final_data = self.p_data
-
-        if os.path.exists(self.filename):
-            if self.p_data == self.json_default:
-                os.remove('WAMsettings.json')
-
-        self.win.destroy()
-
-    def settings_screen(self):
-        for _ in self.json_keys:
-            self.data_values.append(self.data[_])
-
-        for n in range(len(self.labels)):
-            tk.Label(text=self.labels[n]).grid(row=n, column=0, sticky=tk.E)
-
-            e = tk.StringVar()
-            self.entries.append(tk.Entry(width=5, textvariable=e))
-            self.entries[n].grid(row=n, column=1, sticky=tk.W, padx=10)
-            e.set(self.data_values[n])
-
-        btn = ttk.Button(self.win, text='Next', command=self.save)
-        btn.place(relx=.5, rely=0.9, anchor=CENTER)
+        ttk.Button(self.win, text='Save', command=self.save).place(relx=.5, rely=0.9, anchor=CENTER)
 
         self.win.mainloop()
 
-    def no_screen(self):
-        for _ in self.json_keys:
-            self.data_values.append(self.data[_])
+    def no_gui(self):
+        self.final_data = self.data
+        if self.final_data == self.json_default:
+            if os.path.exists(self.filename):
+                os.remove(self.filename)
+        Game(self.final_data)
 
-        for idx, _ in enumerate(self.json_keys):
-            self.final_data[_] = self.data_values[idx]
+    def save(self):
+        for x, y in enumerate(self.entries):
+            try:
+                self.final_data[self.label_key[x][1]] = int(y.get())
+            except ValueError:
+                messagebox.showerror('Error', 'Please input whole numbers')
+                return
+            if self.final_data['num_moles'] > 32:
+                messagebox.showerror('Error', 'Please input 32 moles or less')
+                return
+
+        if self.final_data == self.json_default:
+            if os.path.exists(self.filename):
+                os.remove(self.filename)
+        else:
+            with open(self.filename, 'w') as f:
+                json.dump(self.final_data, f, indent=4)
+        self.win.destroy()
+        Game(self.final_data)
+
+
+class Game:
+    def __init__(self, settings_dict):
+        self.data = settings_dict
+        self.win = Tk()
+        self.win.title("Whack-a-Mole")
+
+        image0 = PhotoImage(file="sprite_0.png")
+        image1 = PhotoImage(file="sprite_1.png")
+        image2 = PhotoImage(file="sprite_2.png")
+        self.image_list = [image0, image1, image2]
+
+        self.timeText = StringVar()
+        self.timer_time = self.data['time']
+        self.timeText.set(f'Time: {self.timer_time}')
+
+        frame1 = Frame(self.win)
+        frame2 = Frame(self.win, bg='#D3D3D3', padx=1, pady=1)
+        frame1.pack()
+        frame2.pack(padx=10, pady=10)
+
+        Label(frame1, font=('Bahnschrift', 40), textvariable=self.timeText,
+              anchor=W, width=8).grid(row=0, column=0)
+
+        self.label_data = {}
+
+        moles = int(self.data['num_moles'])
+        if int(sqrt(moles) + 0.5) ** 2 == moles:
+            columns = rows = int(sqrt(moles))
+        elif moles in range(21, 30):
+            columns = 5
+            rows = 6
+        else:
+            columns = round(sqrt(moles))
+            rows = round(moles / columns)
+            if moles in (5, 7, 10, 13, 17, 18):
+                rows += 1
+
+        for _x in range(columns):
+            for _y in range(rows):
+                if len(self.label_data) < moles:
+                    lbl = Label(frame2, image=self.image_list[0])
+                    lbl.grid(row=_x, column=_y, padx=1, pady=1)
+                    lbl.bind("<ButtonPress-1>", self.label_click)
+                    _timerID = lbl.after(0, lambda: None)
+                    self.label_data[lbl] = _timerID
+
+        for _x, _y in self.label_data.items():
+            sleep(.1)
+            self.disappear(_x)
+
+        self.win.update()
+        self.win.minsize(self.win.winfo_width(), self.win.winfo_height())
+
+        self.timer(None)
+
+        sleep(.2)
+        self.win.mainloop()
+
+    def appear(self, label):
+        label['image'] = self.image_list[1]
+        rand = randint(self.data["min_above"], self.data["max_above"]) * 1000
+        self.label_data[label] = label.after(rand, lambda: self.disappear(label))
+
+    def disappear(self, label):
+        label['image'] = self.image_list[0]
+        rand = randint(self.data["min_under"], self.data["max_under"]) * 1000
+        self.label_data[label] = label.after(rand, lambda: self.appear(label))
+
+    def label_click(self, event):
+        widget = event.widget
+        if widget['image'] == self.image_list[1].name:
+            widget['image'] = self.image_list[2]
+            widget.after_cancel(self.label_data[widget])
+            del self.label_data[widget]
+
+    def timer(self, _id):
+        self.timer_time = float(f'{self.timer_time - .1:.1f}')
+        self.timeText.set(f'Time: {self.timer_time}')
+        if self.label_data:
+            if self.timer_time == 0.0:
+                for _x, _y in self.label_data.items():
+                    _x.after_cancel(_y)
+
+                self.win.after_cancel(_id)
+                response = messagebox.askquestion(title='Game Over', message='You ran out of time! Try again?')
+                if response == 'yes':
+                    self.run_again()
+                if response == 'no':
+                    quit()
+            else:
+                new_id = self.win.after(100, lambda: self.timer(new_id))
+        else:
+            response = messagebox.askquestion(title='Game Over', message='Congrats! You win! Play again?')
+            if response == 'yes':
+                self.run_again()
+            if response == 'no':
+                quit()
+
+    def run_again(self):
+        self.win.destroy()
+        Game(settings_dict=self.data)
 
 
 if __name__ == '__main__':
-    screen_bool = None
-    welcome_screen()
-    settings = Settings(screen_bool)
-    print(settings.final_data)
+    run = Welcome()

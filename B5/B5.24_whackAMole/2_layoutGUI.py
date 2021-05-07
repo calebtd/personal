@@ -3,65 +3,48 @@
 # Whack A Mole - GAME LAYOUT / GUI
 # I did not copy anyone
 
-import tkinter as tk
 from tkinter import *
-from tkinter import ttk
-from tkinter import Tk, Label
-from PIL import Image, ImageTk
 
 
-def welcome_screen():
-    def on_enter(lbl):
-        lbl.configure(borderwidth=2)
+class Welcome:
+    def __init__(self):
+        self.win = Tk()
+        self.win.title("Whack-a-Mole")
+        self.win.config(bg='black')
 
-    def on_leave(lbl):
-        lbl.configure(borderwidth=1)
+        frame1 = Frame(self.win, bg='black')
+        frame2 = Frame(self.win, bg='black')
+        frame1.pack()
+        frame2.pack()
 
-    x = 512
-    y = 512
-    welcome_win = tk.Tk()
-    welcome_win.title("Whack-a-Mole")
-    welcome_win['bg'] = 'black'
-    welcome_win.geometry(f'{x}x{y}')
-    welcome_win.minsize(x, y)
-    welcome_win.maxsize(x, y)
+        Label(frame1, text="Welcome to \nWhack-a-Mole",
+              font=('Bahnschrift', 50), fg='white', bg='black').pack()
+        Label(frame1, height=5, bg='black').pack()
 
-    file = open('welcome.png', 'rb')
-    welcome_image = PIL.ImageTk.PhotoImage(PIL.Image.open(file).resize((x, y - 50)))
-    welcome_lbl = tk.Label(image=welcome_image)
-    welcome_lbl['borderwidth'] = 0
-    welcome_lbl.pack(pady=5)
+        for x, y in enumerate(('Settings', 'Start')):
+            z = Button(frame2, text=y, font=('Bahnschrift', 15), fg='white', bg='black', activeforeground='white',
+                       activebackground='grey', width=12, height=2, relief='ridge')
+            z.config(command=lambda i=x: self.close(i))
+            z.grid(row=2, column=x, padx=10, pady=10)
+            z.bind("<Enter>", self.on_enter)
+            z.bind("<Leave>", self.on_leave)
+        self.win.mainloop()
 
-    file = open('settings.png', 'rb')
-    settings_image = PIL.ImageTk.PhotoImage(PIL.Image.open(file).resize((200, 25)))
-    settings_lbl = tk.Label(image=settings_image)
-    settings_lbl['borderwidth'] = 1
-    settings_lbl.place(relx=0.3, rely=0.96, anchor=CENTER)
-    settings_lbl.bind("<Button-1>", lambda arg: run_settings(True, welcome_win))
-    settings_lbl.bind("<Enter>", lambda arg: on_enter(settings_lbl))
-    settings_lbl.bind("<Leave>", lambda arg: on_leave(settings_lbl))
+    def close(self, btn):
+        self.win.destroy()
+        if btn == 0:
+            print(True)
+        elif btn == 1:
+            print(False)
 
-    file = open('start.png', 'rb')
-    start_image = PIL.ImageTk.PhotoImage(PIL.Image.open(file).resize((130, 25)))
-    start_lbl = tk.Label(image=start_image)
-    start_lbl['borderwidth'] = 1
-    start_lbl.place(relx=0.74, rely=0.96, anchor=CENTER)
-    start_lbl.bind("<Button-1>", lambda arg: run_settings(False, welcome_win))
-    start_lbl.bind("<Enter>", lambda arg: on_enter(start_lbl))
-    start_lbl.bind("<Leave>", lambda arg: on_leave(start_lbl))
+    @staticmethod
+    def on_enter(btn):
+        btn.widget.config(relief='sunken')
 
-    welcome_win.mainloop()
-
-
-def run_settings(val, window):
-    global screen_bool
-    if val:
-        screen_bool = True
-    else:
-        screen_bool = False
-    window.destroy()
+    @staticmethod
+    def on_leave(btn):
+        btn.widget.config(relief='ridge')
 
 
 if __name__ == '__main__':
-    screen_bool = None
-    welcome_screen()
+    Welcome()

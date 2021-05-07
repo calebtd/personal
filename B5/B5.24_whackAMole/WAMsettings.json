@@ -1,0 +1,8 @@
+{
+    "num_moles": 20,
+    "min_under": 1,
+    "max_under": 5,
+    "min_above": 1,
+    "max_above": 1,
+    "time": 20
+}

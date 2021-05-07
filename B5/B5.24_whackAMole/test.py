@@ -31,7 +31,7 @@ def label_click(event):
 def timer(_id):
     global timer_time
     timer_time = float(f'{timer_time - .1:.1f}')
-    timeText.set(timer_time)
+    timeText.set(f'Time: {timer_time}')
 
     print(timer_time)
     if label_data:
@@ -39,15 +39,21 @@ def timer(_id):
             for _x, _y in label_data.items():
                 _x.after_cancel(_y)
             win.after_cancel(_id)
-            again = messagebox.askquestion(title='Game Over', message='You ran out of time! Try again?')
+            response = messagebox.askquestion(title='Game Over', message='You ran out of time! Try again?', icon='info')
+            if response == 'yes':
+                print('Run again.')
+            else:
+                print("Don't Run")
             win.destroy()
-            if again:
-                pass
 
         else:
             new_id = win.after(100, lambda: timer(new_id))
     else:
-        messagebox.showinfo(title='Game Over', message='Congrats! You win!')
+        response = messagebox.showinfo(title='Game Over', message='Congrats! You win! Play again?')
+        if response == 'yes':
+            print('Run again.')
+        else:
+            print("Don't Run")
 
 
 win = Tk()
@@ -60,8 +66,7 @@ frame2.pack(padx=10, pady=10)
 
 timeText = StringVar()
 
-lbl1 = Label(frame1, text='Time:', font=('Agency FB', 40)).grid(row=0, column=0)
-lbl2 = Label(frame1, font=('Agency FB', 40), textvariable=timeText, width=5, anchor=W).grid(row=0, column=1)
+lbl2 = Label(frame1, font=('Bahnschrift', 40), textvariable=timeText, width=8, anchor=W).grid(row=0, column=0)
 
 image0 = PhotoImage(file="sprite_0.png")
 image1 = PhotoImage(file="sprite_1.png")
@@ -73,7 +78,7 @@ label_data = {}
 # ------------------------------------
 
 for x in range(3):
-    for y in range(4):
+    for y in range(3):
         lbl = Label(frame2, image=image_list[0])
         lbl.grid(row=x, column=y, padx=1, pady=1)
         lbl.bind("<ButtonPress-1>", label_click)
@@ -87,7 +92,7 @@ for x, y in label_data.items():
 win.update()
 win.minsize(win.winfo_width(), win.winfo_height())
 
-timer_time = 5
+timer_time = 60
 timeText.set(timer_time)
 
 timer(None)
